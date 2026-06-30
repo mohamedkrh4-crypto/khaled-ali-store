@@ -131,25 +131,27 @@
                         });
                     }
                 }
-                loadingText.classList.add('hidden');
+                if(loadingText) loadingText.classList.add('hidden');
                 renderProducts(globalProducts);
-                grid.classList.remove('hidden');
+                if(grid) grid.classList.remove('hidden');
                 updateCartUI();
             } catch (e) {
-                loadingText.innerText = "❌ فشل تحميل المنتجات.";
+                if(loadingText) loadingText.innerText = "❌ فشل تحميل المنتجات.";
+                console.error(e);
             }
         }
 
         function renderProducts(items) {
             const grid = document.getElementById('products-grid');
             const emptyState = document.getElementById('empty-search-status');
+            if(!grid) return;
             grid.innerHTML = '';
             
             if (items.length === 0) {
-                emptyState.classList.remove('hidden');
+                if(emptyState) emptyState.classList.remove('hidden');
                 return;
             }
-            emptyState.classList.add('hidden');
+            if(emptyState) emptyState.classList.add('hidden');
 
             items.forEach(product => {
                 let mediaHTML = `<div class="h-56 bg-stone-100 flex items-center justify-center text-5xl transition-transform duration-500 ease-in-out transform group-hover:scale-110">${product.icon}</div>`;
@@ -176,7 +178,6 @@
             });
         }
 
-        // دالة البحث اللحظي الفائقة السهولة
         function handleSearch() {
             const query = document.getElementById('search-input').value.toLowerCase().trim();
             const filtered = globalProducts.filter(p => 
@@ -225,12 +226,16 @@
             
             document.getElementById('cart-count-badge').innerText = totalCount;
             const hCount = document.getElementById('cart-count-header');
-            hCount.innerText = totalCount;
-            if(totalCount > 0) hCount.classList.remove('hidden'); else hCount.classList.add('hidden');
+            if(hCount) {
+                hCount.innerText = totalCount;
+                if(totalCount > 0) hCount.classList.remove('hidden'); else hCount.classList.add('hidden');
+            }
             
             const fCart = document.getElementById('floating-cart-btn');
-            document.getElementById('cart-count-floating').innerText = totalCount;
-            if(totalCount > 0) fCart.classList.remove('hidden'); else fCart.classList.add('hidden');
+            if(fCart) {
+                document.getElementById('cart-count-floating').innerText = totalCount;
+                if(totalCount > 0) fCart.classList.remove('hidden'); else fCart.classList.add('hidden');
+            }
 
             if (cart.length === 0) {
                 container.innerHTML = `<div class="text-center py-12 text-stone-400 text-sm">السلة فارغة حالياً.</div>`;
