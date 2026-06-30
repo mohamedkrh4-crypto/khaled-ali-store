@@ -14,15 +14,14 @@
 </head>
 <body class="bg-stone-50 text-stone-800 min-h-screen flex flex-col">
 
-    <!-- الهيدر -->
     <header class="bg-white shadow-sm sticky top-0 z-40">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-3 group">
+            <a href="index.html" class="flex items-center gap-3 group cursor-pointer">
                 <div class="h-9 w-9 rounded-full bg-[#2A4B37] text-white flex items-center justify-center font-bold text-xs group-hover:bg-[#1E3527] transition">←</div>
-                <span class="text-lg font-bold text-[#2A4B37]">الرئيسية</span>
+                <span class="text-lg font-bold text-[#2A4B37] group-hover:underline">الرئيسية</span>
             </a>
             <h1 class="text-xl font-bold text-stone-900">صالة المنتجات الكاملة 🛍️</h1>
-            <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-stone-100 text-stone-700 rounded-full hover:bg-stone-200 transition cursor-pointer">
+            <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-stone-100 text-stone-700 rounded-full hover:bg-stone-200 transition cursor-pointer" title="عرض السلة">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                 </svg>
@@ -31,18 +30,31 @@
         </div>
     </header>
 
-    <!-- قائمة المنتجات الكاملة -->
+    <section class="bg-stone-100 border-b border-stone-200 py-6">
+        <div class="container mx-auto px-6 max-w-2xl">
+            <div class="relative bg-white rounded-xl shadow-xs border border-stone-200 flex items-center px-4 py-1 focus-within:ring-2 focus-within:ring-[#2A4B37]/20 focus-within:border-[#2A4B37] transition">
+                <span class="text-stone-400 text-lg pl-2">🔍</span>
+                <input type="text" id="search-input" oninput="handleSearch()" placeholder="ابحث عن أطقم، كاسات، أو أدوات منزلية معينة..." class="w-full bg-transparent py-2.5 text-stone-800 placeholder-stone-400 focus:outline-none text-sm md:text-base">
+            </div>
+        </div>
+    </section>
+
     <main class="container mx-auto px-6 py-12 flex-1">
         <div id="loading-status" class="text-center py-12 text-stone-500 text-lg">⏳ جاري جلب كافة المنتجات الفاخرة...</div>
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 hidden">
-            <!-- كل المنتجات تظهر هنا -->
+        
+        <div id="empty-search-status" class="text-center py-16 text-stone-500 hidden space-y-3">
+            <span class="text-4xl block">🍽️</span>
+            <p class="text-lg font-semibold text-stone-700">عذراً، لم نجد أي منتجات تطابق بحثك حالياً.</p>
+            <p class="text-sm text-stone-400">جرب كتابة كلمات أخرى أو تصفح المعرض كاملاً.</p>
         </div>
+
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 hidden">
+            </div>
     </main>
 
-    <!-- مودال التفاصيل المطور -->
     <div id="product-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col md:flex-row overflow-hidden animate-popup">
-            <button onclick="closeModal()" class="absolute top-4 left-4 bg-white/80 hover:bg-stone-200 text-stone-700 h-10 w-10 rounded-full flex items-center justify-center z-10 font-bold shadow">✕</button>
+            <button onclick="closeModal()" class="absolute top-4 left-4 bg-white/80 hover:bg-stone-200 text-stone-700 h-10 w-10 rounded-full flex items-center justify-center z-10 font-bold shadow cursor-pointer">✕</button>
             <div class="w-full md:w-3/5 h-72 md:h-auto bg-stone-100 flex items-center justify-center relative overflow-hidden" id="modal-media-container"></div>
             <div class="w-full md:w-2/5 p-8 flex flex-col justify-between space-y-6 bg-white">
                 <div class="space-y-4">
@@ -57,7 +69,6 @@
         </div>
     </div>
 
-    <!-- السلة الجانبية الشخصية للمستخدم المحفوظة بالـ LocalStorage -->
     <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
         <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>
         <div class="absolute inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col justify-between">
@@ -84,7 +95,6 @@
         </div>
     </div>
 
-    <!-- زر السلة العائم -->
     <button onclick="toggleCartDrawer()" id="floating-cart-btn" class="fixed bottom-6 right-6 z-40 bg-amber-600 hover:bg-amber-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition hidden cursor-pointer">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
         <span id="cart-count-floating" class="absolute -top-1 -left-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
@@ -97,7 +107,7 @@
     <script>
         const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxdTJvpCwEax5QOTSuzwuRxY_bJGLVJpso3A5SitG72v998xuDD7XNBORA4RFJcKCarLWE8dQR_0iV/pub?output=csv";
         let globalProducts = [];
-        let cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || []; // متصل بنفس المخزن الذكي
+        let cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || [];
 
         async function fetchAllProducts() {
             const loadingText = document.getElementById('loading-status');
@@ -132,14 +142,22 @@
 
         function renderProducts(items) {
             const grid = document.getElementById('products-grid');
+            const emptyState = document.getElementById('empty-search-status');
             grid.innerHTML = '';
+            
+            if (items.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
             items.forEach(product => {
                 let mediaHTML = `<div class="h-56 bg-stone-100 flex items-center justify-center text-5xl transition-transform duration-500 ease-in-out transform group-hover:scale-110">${product.icon}</div>`;
                 if (product.img && product.img.startsWith('http')) {
                     mediaHTML = `<div class="h-56 overflow-hidden bg-stone-50"><img src="${product.img}" class="w-full h-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-110" onerror="this.parentElement.innerHTML='📦'" alt="${product.name}"></div>`;
                 }
                 const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl border border-stone-200 overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer group flex flex-col justify-between";
+                card.className = "bg-white rounded-2xl border border-stone-200 overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer group flex flex-col justify-between animate-popup";
                 card.setAttribute('onclick', `openModal(${product.id})`);
                 card.innerHTML = `
                     <div>
@@ -156,6 +174,16 @@
                 `;
                 grid.appendChild(card);
             });
+        }
+
+        // دالة البحث اللحظي الفائقة السهولة
+        function handleSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const filtered = globalProducts.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.desc.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
         }
 
         function openModal(id) {
@@ -228,9 +256,9 @@
                         <p class="text-xs text-stone-700 font-semibold mt-1">المجموع: ${totalItemPrice} EGP</p>
                     </div>
                     <div class="flex items-center gap-1.5 bg-white border border-stone-200 rounded-lg p-1">
-                        <button onclick="changeQuantity(${item.id}, 1)" class="w-5 h-5 bg-stone-50 text-xs rounded hover:bg-stone-200 font-bold">+</button>
+                        <button onclick="changeQuantity(${item.id}, 1)" class="w-5 h-5 bg-stone-50 text-xs rounded hover:bg-stone-200 font-bold cursor-pointer">+</button>
                         <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
-                        <button onclick="changeQuantity(${item.id}, -1)" class="w-5 h-5 bg-stone-50 text-xs rounded hover:bg-stone-200 font-bold">-</button>
+                        <button onclick="changeQuantity(${item.id}, -1)" class="w-5 h-5 bg-stone-50 text-xs rounded hover:bg-stone-200 font-bold cursor-pointer">-</button>
                     </div>
                 `;
                 container.appendChild(row);
