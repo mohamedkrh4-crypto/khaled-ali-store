@@ -24,7 +24,7 @@
                 <span class="text-xl font-bold text-[#2A4B37] tracking-wide">KHALED ALI STORE</span>
             </div>
             <div class="flex items-center gap-4">
-                <!-- أيقونة عربة التسوق الكاملة والمتزامنة في الرئيسية -->
+                <!-- أيقونة عربة التسوق المتزامنة -->
                 <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-stone-100 text-stone-700 rounded-full hover:bg-stone-200 transition cursor-pointer" title="عرض السلة">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
@@ -53,28 +53,28 @@
         </div>
     </section>
 
-    <!-- قسم المعروض حالياً -->
+    <!-- قسم الأكثر مبيعاً (3 منتجات فقط) -->
     <section class="bg-white py-16 shadow-inner">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-stone-900 mb-2">المعروض حالياً</h2>
-            <p class="text-stone-500 text-center mb-12">لمحة سريعة عن المنتجات المتوفرة الآن في صالة العرض</p>
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="text-3xl font-bold text-center text-stone-900 mb-2">الأكثر مبيعاً حالياً 🔥</h2>
+            <p class="text-stone-500 text-center mb-12">المنتجات الأكثر طلباً ونظيراتها الأعلى تقييماً من زبائننا</p>
             
-            <div id="loading-status" class="text-center py-8 text-stone-500 text-lg">⏳ جاري تحميل المعروضات...</div>
+            <div id="loading-status" class="text-center py-8 text-stone-500 text-lg">⏳ جاري مراجعة قائمة التريندات...</div>
 
-            <!-- تم تعديل توازن الجريد عشان لو منتج واحد يظهر متناسق ومريح للعين -->
             <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center hidden">
-                <!-- المنتجات تظهر هنا -->
+                <!-- الـ 3 منتجات التريند هتظهر هنا -->
             </div>
 
+            <!-- الزرار الجديد المطور: متناسق، فخم، وبدون الأيقونة الصفراء القديمة -->
             <div class="text-center mt-12">
-                <a href="products.html" class="inline-flex items-center gap-2 border-2 border-[#2A4B37] text-[#2A4B37] hover:bg-[#2A4B37] hover:text-white px-8 py-3 rounded-xl font-bold transition duration-300">
-                    عرض جميع المنتجات والأسعار 📂
+                <a href="products.html" class="inline-flex items-center justify-center bg-[#2A4B37] hover:bg-[#1E3527] text-white px-12 py-4 rounded-xl font-bold transition duration-300 shadow-md hover:shadow-xl text-lg tracking-wide">
+                    عرض جميع المنتجات والأسعار
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- قسم قنوات التليجرام والواتساب -->
+    <!-- قسم قنوات التواصل -->
     <section class="bg-stone-100 py-16 border-t border-stone-200">
         <div class="container mx-auto px-6">
             <h2 class="text-2xl font-bold text-center text-stone-900 mb-2">تابعوا أسعارنا وحصرياتنا أولاً بأول 📢</h2>
@@ -99,7 +99,6 @@
                     <span class="text-xs font-semibold text-indigo-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <!-- تم تعديل المسمى لـ "واتساب" مباشرة بناءً على طلبك -->
                 <a href="https://wa.me/201090140339" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
                     <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition">💬</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">واتساب</h3>
@@ -109,7 +108,7 @@
         </div>
     </section>
 
-    <!-- صندوق السلة الجانبي (موجود في الرئيسية كمان لمنع تصفير المنتجات عند التنقل) -->
+    <!-- صندوق السلة الجانبي -->
     <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
         <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>
         <div class="absolute inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col justify-between">
@@ -134,7 +133,7 @@
         </div>
     </div>
 
-    <!-- زر السلة العائم في الرئيسية -->
+    <!-- زر السلة العائم -->
     <button onclick="toggleCartDrawer()" id="floating-cart-btn" class="fixed bottom-6 right-6 z-40 bg-amber-600 hover:bg-amber-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition hidden cursor-pointer">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
         <span id="cart-count-floating" class="absolute -top-1 -left-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
@@ -147,7 +146,7 @@
     <script>
         const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxdTJvpCwEax5QOTSuzwuRxY_bJGLVJpso3A5SitG72v998xuDD7XNBORA4RFJcKCarLWE8dQR_0iV/pub?output=csv";
         let globalProducts = [];
-        let cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || []; // استرجاع فوري ومستمر للمنتجات
+        let cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || [];
 
         function toggleCartDrawer() { document.getElementById('cart-drawer').classList.toggle('hidden'); }
 
@@ -207,7 +206,7 @@
             document.getElementById('cart-total-price').innerText = `${totalMoney} EGP`;
         }
 
-        async function fetchFeaturedProducts() {
+        async function fetchTrendingProducts() {
             const loadingText = document.getElementById('loading-status');
             const grid = document.getElementById('products-grid');
             try {
@@ -215,48 +214,59 @@
                 const csvText = await response.text();
                 const rows = csvText.split(/\r?\n/).map(row => row.trim()).filter(row => row);
                 
-                loadingText.classList.add('hidden');
-                grid.innerHTML = '';
-                
-                const limit = Math.min(rows.length, 4); 
-                for (let i = 1; i < limit; i++) {
+                let allFetched = [];
+                for (let i = 1; i < rows.length; i++) {
                     const columns = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                     if (columns.length >= 2) {
-                        const product = {
+                        allFetched.push({
                             id: i - 1,
                             name: columns[0] ? columns[0].replace(/^"|"$/g, '').trim() : 'منتج جديد',
                             price: columns[1] ? columns[1].replace(/^"|"$/g, '').trim() : 'حسب الطلب',
                             desc: columns[2] ? columns[2].replace(/^"|"$/g, '').trim() : '',
                             img: columns[3] ? columns[3].replace(/^"|"$/g, '').trim() : '',
-                            icon: columns[4] ? columns[4].replace(/^"|"$/g, '').trim() : '📦'
-                        };
-                        globalProducts.push(product);
-
-                        let mediaHTML = `<div class="h-56 bg-stone-100 flex items-center justify-center text-5xl">${product.icon}</div>`;
-                        if (product.img && product.img.startsWith('http')) {
-                            mediaHTML = `<div class="h-56 overflow-hidden bg-stone-50"><img src="${product.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"></div>`;
-                        }
-                        const card = document.createElement('div');
-                        card.className = "bg-white rounded-2xl border border-stone-200 overflow-hidden hover:shadow-xl transition duration-300 group flex flex-col justify-between";
-                        card.innerHTML = `
-                            <div>
-                                ${mediaHTML}
-                                <div class="p-5">
-                                    <h3 class="text-base font-bold text-stone-900 mb-1.5 group-hover:text-[#2A4B37] transition">${product.name}</h3>
-                                    <p class="text-xs text-stone-500 line-clamp-2">${product.desc}</p>
-                                </div>
-                            </div>
-                            <div class="p-5 border-t border-stone-50 flex justify-between items-center bg-stone-50/50">
-                                <span class="text-base font-bold text-[#2A4B37]">${product.price}</span>
-                                <button onclick="addToCart(${product.id})" class="bg-[#2A4B37] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#1E3527] cursor-pointer">إضافة للسلة 🛒</button>
-                            </div>
-                        `;
-                        grid.appendChild(card);
+                            icon: columns[4] ? columns[4].replace(/^"|"$/g, '').trim() : '📦',
+                            status: columns[5] ? columns[5].replace(/^"|"$/g, '').trim() : ''
+                        });
                     }
                 }
+
+                let trending = allFetched.filter(p => p.status.includes('تريند') || p.status.includes('بيع'));
+                if (trending.length === 0) {
+                    trending = allFetched.slice(0, 3);
+                } else {
+                    trending = trending.slice(0, 3);
+                }
+
+                globalProducts = trending;
+                loadingText.classList.add('hidden');
+                grid.innerHTML = '';
+
+                trending.forEach(product => {
+                    let mediaHTML = `<div class="h-56 bg-stone-100 flex items-center justify-center text-5xl">${product.icon}</div>`;
+                    if (product.img && product.img.startsWith('http')) {
+                        mediaHTML = `<div class="h-56 overflow-hidden bg-stone-50 relative"><img src="${product.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"></div>`;
+                    }
+                    const card = document.createElement('div');
+                    card.className = "bg-white rounded-2xl border border-stone-200 overflow-hidden hover:shadow-xl transition duration-300 group flex flex-col justify-between relative animate-popup";
+                    card.innerHTML = `
+                        <div>
+                            <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-md z-10 shadow-sm tracking-wide">الأكثر مبيعاً 🔥</span>
+                            ${mediaHTML}
+                            <div class="p-5">
+                                <h3 class="text-base font-bold text-stone-900 mb-1.5 group-hover:text-[#2A4B37] transition line-clamp-1">${product.name}</h3>
+                                <p class="text-xs text-stone-500 line-clamp-2">${product.desc}</p>
+                            </div>
+                        </div>
+                        <div class="p-5 border-t border-stone-50 flex justify-between items-center bg-stone-50/50">
+                            <span class="text-base font-bold text-[#2A4B37]">${product.price}</span>
+                            <button onclick="addToCart(${product.id})" class="bg-[#2A4B37] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#1E3527] cursor-pointer">إضافة للسلة 🛒</button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
                 grid.classList.remove('hidden');
             } catch (e) {
-                loadingText.innerText = "⚠️ فشل تحميل المعروضات الحالية.";
+                loadingText.innerText = "⚠️ فشل تحميل تريندات المعرض.";
             }
         }
 
@@ -278,7 +288,7 @@
         }
 
         updateCartUI();
-        fetchFeaturedProducts();
+        fetchTrendingProducts();
     </script>
 </body>
 </html>
