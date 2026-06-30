@@ -17,8 +17,8 @@
     <!-- الهيدر -->
     <header class="bg-white shadow-sm sticky top-0 z-40">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-3">
-                <div class="h-9 w-9 rounded-full bg-[#2A4B37] text-white flex items-center justify-center font-bold text-xs">←</div>
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="h-9 w-9 rounded-full bg-[#2A4B37] text-white flex items-center justify-center font-bold text-xs group-hover:bg-[#1E3527] transition">←</div>
                 <span class="text-lg font-bold text-[#2A4B37]">الرئيسية</span>
             </a>
             <h1 class="text-xl font-bold text-stone-900">صالة المنتجات الكاملة 🛍️</h1>
@@ -39,7 +39,7 @@
         </div>
     </main>
 
-    <!-- مودال التفاصيل المطور (يعرض الصورة كاملة) -->
+    <!-- مودال التفاصيل المطور -->
     <div id="product-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col md:flex-row overflow-hidden animate-popup">
             <button onclick="closeModal()" class="absolute top-4 left-4 bg-white/80 hover:bg-stone-200 text-stone-700 h-10 w-10 rounded-full flex items-center justify-center z-10 font-bold shadow">✕</button>
@@ -97,8 +97,7 @@
     <script>
         const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxdTJvpCwEax5QOTSuzwuRxY_bJGLVJpso3A5SitG72v998xuDD7XNBORA4RFJcKCarLWE8dQR_0iV/pub?output=csv";
         let globalProducts = [];
-        // قراءة السلة من جهاز المستخدم الشخصي فوراً عند فتح الصفحة
-        let cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || [];
+        let cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || []; // متصل بنفس المخزن الذكي
 
         async function fetchAllProducts() {
             const loadingText = document.getElementById('loading-status');
@@ -179,8 +178,6 @@
             if (!product) return;
             const existing = cart.find(item => item.id === id);
             if (existing) { existing.quantity += 1; } else { cart.push({ ...product, quantity: 1 }); }
-            
-            // حفظ التعديل فوراً في جهاز المستخدم
             localStorage.setItem('khaled_store_cart', JSON.stringify(cart));
             updateCartUI();
         }
