@@ -1,244 +1,447 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" direction="rtl" style="direction: rtl;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KHALED ALI STORE | الرئيسية</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { font-family: 'Cairo', sans-serif; } 
-        html { scroll-behavior: smooth; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        .animate-popup { animation: fadeIn 0.25s ease-out forwards; }
+        :root {
+            --primary-color: #1e4620;
+            --primary-hover: #143216;
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* الهيدر ونظام التنقل */
+        header {
+            background: #ffffff;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-shop-now {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .btn-shop-now:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .cart-icon-btn {
+            background: #f1f3f5;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            cursor: pointer;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e63946;
+            color: white;
+            font-size: 0.75rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* الأقسام الرئيسية */
+        .section-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #6c757d;
+            font-size: 1rem;
+        }
+
+        /* شبكة المنتجات والكروت */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eee;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 220px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .fallback-emoji {
+            font-size: 4rem;
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        .product-desc {
+            color: #6c757d;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--primary-color);
+        }
+
+        .btn-add-to-cart {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+
+        .btn-add-to-cart:hover {
+            background: var(--primary-hover);
+        }
+
+        /* زر تصفح جميع المنتجات */
+        .view-all-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .btn-view-all {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-view-all:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* رسائل التحميل */
+        .loading-text {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+            padding: 40px 0;
+        }
+
+        /* بانر الاشتراك والقنوات */
+        .footer-banner {
+            background: #f1f3f5;
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 20px;
+            margin-top: 60px;
+        }
+
+        .footer-banner h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-banner p {
+            color: #6c757d;
+        }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-800 relative min-h-screen flex flex-col">
+<body>
 
-    <header class="bg-white shadow-sm sticky top-0 z-40">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" class="h-11 w-11 rounded-full object-cover shadow-md border border-stone-100">
-                <div id="logo-fallback" class="hidden h-11 w-11 rounded-full bg-[#2A4B37] text-white flex items-center justify-center font-bold text-sm">KA</div>
-                <span class="text-xl font-bold text-[#2A4B37] tracking-wide">KHALED ALI STORE</span>
-            </div>
-            <div class="flex items-center gap-4">
-                <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-stone-100 text-stone-700 rounded-full hover:bg-stone-200 transition cursor-pointer" title="عرض السلة">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                    </svg>
-                    <span id="cart-count-header" class="absolute -top-1 -right-1 bg-amber-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold hidden">0</span>
-                </button>
-                <a href="products.html" class="bg-[#2A4B37] hover:bg-[#1E3527] text-white px-6 py-2 rounded-full font-medium transition shadow-md text-sm sm:text-base">تسوق الآن 🛒</a>
-            </div>
+    <header>
+        <div class="logo-container">
+            <span class="logo-text">KHALED ALI STORE</span>
+        </div>
+        <div class="nav-actions">
+            <a href="products.html" class="btn-shop-now">
+                <i class="fas fa-shopping-cart"></i> تسوق الآن
+            </a>
+            <a href="products.html" class="cart-icon-btn">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </a>
         </div>
     </header>
 
-    <section class="container mx-auto px-6 py-16 text-center md:text-right md:flex md:items-center md:justify-between gap-12">
-        <div class="md:w-1/2 space-y-6">
-            <span class="bg-emerald-100 text-emerald-900 text-sm font-semibold px-4 py-1.5 rounded-full">أهلاً بكم في KHALED ALI STORE</span>
-            <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">تشكيلة فاخرة من الأدوات المنزلية والزجاج العصري</h1>
-            <p class="text-lg text-stone-600">نوفر لكم أرقى أطقم العشاء، الكاسات، ومستلزمات المطبخ الفخمة التي تمنح منزلك لمسة جمالية فريدة.</p>
-            <div class="flex pt-2 justify-center md:justify-start">
-                <a href="products.html" class="bg-[#2A4B37] hover:bg-[#1E3527] text-white text-center px-10 py-3.5 rounded-xl font-bold transition shadow-lg text-lg">تصفح المتجر بالكامل 🛍️</a>
-            </div>
+    <section class="section-container">
+        <div class="section-title">
+            <h2>المعروض حالياً</h2>
+            <p>لمحة سريعة عن المنتجات المتوفرة الآن في صالة العرض</p>
         </div>
-        <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
-            <div class="relative p-2 bg-white rounded-3xl shadow-2xl border border-stone-100 w-full max-w-md h-80 sm:h-96 overflow-hidden">
-                <img src="logo.jpg" alt="Khaled Ali Store" onerror="this.src='https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?q=80&w=600'" class="rounded-2xl w-full h-full object-cover">
-            </div>
+        <div id="generalProducts" class="products-grid">
+            <div class="loading-text">⏳ جاري تحميل المنتجات الرائعة...</div>
         </div>
     </section>
 
-    <section class="bg-white py-16 shadow-inner">
-        <div class="container mx-auto px-6 max-w-6xl">
-            <h2 class="text-3xl font-bold text-center text-stone-900 mb-2">الأكثر مبيعاً حالياً 🔥</h2>
-            <p class="text-stone-500 text-center mb-12">المنتجات الأكثر طلباً ونظيراتها الأعلى تقييماً من زبائننا</p>
-            
-            <div id="loading-status" class="text-center py-8 text-stone-500 text-lg">⏳ جاري مراجعة قائمة التريندات...</div>
+    <section class="section-container" style="background: #ffffff; padding: 40px 20px; border-radius: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.02);">
+        <div class="section-title">
+            <h2>الأكثر مبيعاً حالياً 🔥</h2>
+            <p>المنتجات الأكثر طلباً ونظيراتها الأعلى تقييماً من زبائننا</p>
+        </div>
+        <div id="trendingProducts" class="products-grid">
+            <div class="loading-text">⏳ جاري مراجعة قائمة التريندات...</div>
+        </div>
 
-            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center hidden">
-                </div>
-
-            <div class="text-center mt-12">
-                <a href="products.html" class="inline-flex items-center justify-center bg-[#2A4B37] hover:bg-[#1E3527] text-white px-12 py-4 rounded-xl font-bold transition duration-300 shadow-md hover:shadow-xl text-lg tracking-wide">
-                    عرض جميع المنتجات والأسعار
-                </a>
-            </div>
+        <div class="view-all-container">
+            <a href="products.html" class="btn-view-all">
+                <i class="far fa-folder-open"></i> عرض جميع المنتجات والأسعار
+            </a>
         </div>
     </section>
 
-    <section class="bg-stone-100 py-16 border-t border-stone-200">
-        <div class="container mx-auto px-6">
-            <h2 class="text-2xl font-bold text-center text-stone-900 mb-2">تابعوا أسعارنا وحصرياتنا أولاً بأول 📢</h2>
-            <p class="text-stone-500 text-center mb-10">اشتركوا في قنواتنا الرسمية وتواصلوا معنا مباشرة</p>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <a href="https://t.me/+Tg51D7mJwR5NOWUo" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-sky-500 group-hover:text-white transition">🛍️</div>
-                    <h3 class="text-lg font-bold text-stone-900 mb-2">قناة التليجرام (بالقطعة)</h3>
-                    <span class="text-xs font-semibold text-sky-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
-                </a>
-
-                <a href="https://t.me/+japBuh8s_btiNzZk" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition">📦</div>
-                    <h3 class="text-lg font-bold text-stone-900 mb-2">قناة الجملة (بالكرتونة)</h3>
-                    <span class="text-xs font-semibold text-blue-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
-                </a>
-
-                <a href="https://t.me/+qSb8Id_HmTpjMWY0" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition">✨</div>
-                    <h3 class="text-lg font-bold text-stone-900 mb-2">قناة التليجرام (للبلاستيك)</h3>
-                    <span class="text-xs font-semibold text-indigo-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
-                </a>
-
-                <a href="https://wa.me/201090140339" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition">💬</div>
-                    <h3 class="text-lg font-bold text-stone-900 mb-2">واتساب</h3>
-                    <span class="text-xs font-semibold text-emerald-600 group-hover:underline mt-auto">افتح شات الواتساب ←</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
-        <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>
-        <div class="absolute inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col justify-between">
-            <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50">
-                <div class="flex items-center gap-2">
-                    <span class="text-xl">🛒</span>
-                    <h3 class="text-lg font-bold text-stone-900">سلة مشترياتك</h3>
-                    <span id="cart-count-badge" class="bg-[#2A4B37] text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
-                </div>
-                <button onclick="toggleCartDrawer()" class="text-stone-400 hover:text-stone-600 font-bold text-xl cursor-pointer">✕</button>
-            </div>
-            <div id="cart-items-container" class="p-6 overflow-y-auto flex-1 space-y-4"></div>
-            <div class="p-6 border-t border-stone-100 bg-stone-50 space-y-4">
-                <div class="flex justify-between items-center text-stone-900 font-bold text-lg">
-                    <span>إجمالي الحساب:</span>
-                    <span id="cart-total-price" class="text-[#2A4B37]">0 EGP</span>
-                </div>
-                <button onclick="checkoutCartViaWhatsApp()" class="w-full bg-[#2A4B37] hover:bg-[#1E3527] text-white py-4 rounded-xl font-bold transition flex items-center justify-center gap-2 cursor-pointer">
-                    إرسال الطلب المجمع عبر واتساب ⚡
-                </button>
-            </div>
+    <div class="section-container">
+        <div class="footer-banner">
+            <h3>تابعوا أسعارنا وحصرياتنا أولاً بأول 📢</h3>
+            <p>اشتركوا في قنواتنا الرسمية وتواصلوا معنا مباشرة</p>
         </div>
     </div>
 
-    <button onclick="toggleCartDrawer()" id="floating-cart-btn" class="fixed bottom-6 right-6 z-40 bg-amber-600 hover:bg-amber-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition hidden cursor-pointer">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-        <span id="cart-count-floating" class="absolute -top-1 -left-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
-    </button>
-
-    <footer class="bg-stone-900 text-stone-400 py-8 text-center text-sm mt-auto">
-        <p>© 2026 KHALED ALI STORE. جميع الحقوق محفوظة.</p>
-    </footer>
-
     <script>
-        const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxdTJvpCwEax5QOTSuzwuRxY_bJGLVJpso3A5SitG72v998xuDD7XNBORA4RFJcKCarLWE8dQR_0iV/pub?output=csv";
-        let globalProducts = [];
-        let cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || [];
+        // رابط الـ CSV المباشر والنهائي الخاص بك
+        const googleSheetCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxdTJvpCwEax5QOTSuzwuRxY_bJGLVJpso3A5SitG72v998xuDD7XNBORA4RFJcKCarLWE8dQR_0iV/pub?output=csv';
 
-        function toggleCartDrawer() { document.getElementById('cart-drawer').classList.toggle('hidden'); }
-
-        function changeQuantity(id, delta) {
-            const item = cart.find(item => item.id === id);
-            if (!item) return;
-            item.quantity += delta;
-            if (item.quantity <= 0) cart = cart.filter(item => item.id !== id);
-            localStorage.setItem('khaled_store_cart', JSON.stringify(cart));
-            updateCartUI();
+        // تحديث شارة السلة العلوية من الـ LocalStorage
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartBadge').innerText = totalItems;
         }
 
-        function updateCartUI() {
-            const container = document.getElementById('cart-items-container');
-            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            
-            document.getElementById('cart-count-badge').innerText = totalCount;
-            const hCount = document.getElementById('cart-count-header');
-            hCount.innerText = totalCount;
-            if(totalCount > 0) hCount.classList.remove('hidden'); else hCount.classList.add('hidden');
-            
-            const fCart = document.getElementById('floating-cart-btn');
-            document.getElementById('cart-count-floating').innerText = totalCount;
-            if(totalCount > 0) fCart.classList.remove('hidden'); else fCart.classList.add('hidden');
-
-            if (cart.length === 0) {
-                container.innerHTML = `<div class="text-center py-12 text-stone-400 text-sm">السلة فارغة حالياً.</div>`;
-                document.getElementById('cart-total-price').innerText = '0 EGP';
-                return;
+        // دالة إضافة المنتج للسلة المربوطة بصفحة المنتجات
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || [];
+            let existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
             }
-
-            container.innerHTML = '';
-            let totalMoney = 0;
-            cart.forEach(item => {
-                const priceNum = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
-                const totalItemPrice = priceNum * item.quantity;
-                totalMoney += totalItemPrice;
-
-                const row = document.createElement('div');
-                row.className = "flex items-center gap-3 bg-stone-50 p-3 rounded-xl border border-stone-100 animate-popup";
-                row.innerHTML = `
-                    <div class="w-14 h-14 rounded-lg bg-white overflow-hidden border border-stone-200 shrink-0 flex items-center justify-center text-xl">
-                        ${item.img ? `<img src="${item.img}" class="w-full h-full object-cover">` : item.icon}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h4 class="text-sm font-bold text-stone-900 truncate">${item.name}</h4>
-                        <p class="text-xs text-stone-700 font-semibold mt-1">المجموع: ${totalItemPrice} EGP</p>
-                    </div>
-                    <div class="flex items-center gap-1.5 bg-white border border-stone-200 rounded-lg p-1">
-                        <button onclick="changeQuantity(${item.id}, 1)" class="w-5 h-5 bg-stone-50 text-xs rounded hover:bg-stone-200 font-bold cursor-pointer">+</button>
-                        <span class="text-xs font-bold w-4 text-center">${item.quantity}</span>
-                        <button onclick="changeQuantity(${item.id}, -1)" class="w-5 h-5 bg-stone-50 text-xs rounded hover:bg-stone-200 font-bold cursor-pointer">-</button>
-                    </div>
-                `;
-                container.appendChild(row);
-            });
-            document.getElementById('cart-total-price').innerText = `${totalMoney} EGP`;
+            localStorage.setItem('khaled_store_cart', JSON.stringify(cart));
+            updateCartBadge();
+            alert(`تم إضافة (${name}) إلى سلتك بنجاح!🛒`);
         }
 
-        async function fetchTrendingProducts() {
-            const loadingText = document.getElementById('loading-status');
-            const grid = document.getElementById('products-grid');
+        // جلب البيانات ومعالجتها وتوزيعها
+        async function loadStoreData() {
             try {
                 const response = await fetch(googleSheetCsvUrl);
                 const csvText = await response.text();
+                
+                // تقسيم البيانات لصفوف
                 const rows = csvText.split(/\r?\n/).map(row => row.trim()).filter(row => row);
                 
-                let allFetched = [];
+                let generalHtml = '';
+                let trendingHtml = '';
+                let hasTrending = false;
+
+                // التكرار على الصفوف وتخطي صف العناوين الأول (i = 1)
                 for (let i = 1; i < rows.length; i++) {
+                    // كود معالجة الفواصل المعقدة داخل النصوص للتأكد من قراءة الأعمدة بشكل سليم
                     const columns = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    
                     if (columns.length >= 2) {
-                        allFetched.push({
-                            id: i - 1,
-                            name: columns[0] ? columns[0].replace(/^"|"$/g, '').trim() : 'منتج جديد',
-                            price: columns[1] ? columns[1].replace(/^"|"$/g, '').trim() : 'حسب الطلب',
-                            desc: columns[2] ? columns[2].replace(/^"|"$/g, '').trim() : '',
-                            img: columns[3] ? columns[3].replace(/^"|"$/g, '').trim() : '',
-                            icon: columns[4] ? columns[4].replace(/^"|"$/g, '').trim() : '📦',
-                            status: columns[5] ? columns[5].replace(/^"|"$/g, '').trim() : ''
-                        });
+                        const name = columns[0] ? columns[0].replace(/^"|"$/g, '').trim() : 'منتج بدون اسم';
+                        const price = columns[1] ? columns[1].replace(/^"|"$/g, '').trim() : 'غير محدد';
+                        const desc = columns[2] ? columns[2].replace(/^"|"$/g, '').trim() : '';
+                        const imgUrl = columns[3] ? columns[3].replace(/^"|"$/g, '').trim() : '';
+                        const emoji = columns[4] ? columns[4].replace(/^"|"$/g, '').trim() : '📦';
+                        const status = columns[5] ? columns[5].replace(/^"|"$/g, '').trim() : '';
+
+                        // بناء المكون المرئي للصورة أو الأيقونة البديلة
+                        let mediaBlock = `<span class="fallback-emoji">${emoji}</span>`;
+                        if (imgUrl && imgUrl.startsWith('http')) {
+                            mediaBlock = `<img src="${imgUrl}" class="product-img" alt="${name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\"fallback-emoji\">${emoji}</span>'">`;
+                        }
+
+                        // كارت المنتج الأساسي
+                        const cardHtml = `
+                            <div class="product-card">
+                                <div class="image-container">
+                                    ${mediaBlock}
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">${name}</h3>
+                                    <p class="product-desc">${desc}</p>
+                                    <div class="product-footer">
+                                        <span class="product-price">${price}</span>
+                                        <button class="btn-add-to-cart" onclick="addToCart('${name.replace(/'/g, "\\'")}', '${price}')">
+                                            <i class="fas fa-shopping-basket"></i> شراء الآن
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        // توزيع المنتج في الأقسام بناءً على كلمة "تريند" في العمود السادس F
+                        generalHtml += cardHtml;
+                        if (status.includes("تريند")) {
+                            trendingHtml += cardHtml;
+                            hasTrending = true;
+                        }
                     }
                 }
 
-                // فلترة المنتجات التريند أو الأكثر مبيعاً
-                let trending = allFetched.filter(p => p.status.includes('تريند') || p.status.includes('بيع'));
-                if (trending.length === 0) {
-                    trending = allFetched.slice(0, 3);
+                // عرض المنتجات في الدوم
+                document.getElementById('generalProducts').innerHTML = generalHtml || '<div class="loading-text">لا توجد منتجات معروضة حالياً.</div>';
+                
+                if (hasTrending) {
+                    document.getElementById('trendingProducts').innerHTML = trendingHtml;
                 } else {
-                    trending = trending.slice(0, 3);
+                    document.getElementById('trendingProducts').innerHTML = '<div class="loading-text">سيتم إضافة التريندات فور تفعيلها من لوحة التحكم الخارجي 📊</div>';
                 }
 
-                globalProducts = trending;
-                loadingText.classList.add('hidden');
-                grid.innerHTML = '';
+            } catch (error) {
+                console.error("Error loading sheet data:", error);
+                document.getElementById('generalProducts').innerHTML = '<div class="loading-text" style="color:red;">❌ عذراً، فشل الاتصال بقاعدة البيانات. تأكد من إعدادات النشر على الويب.</div>';
+                document.getElementById('trendingProducts').innerHTML = '<div class="loading-text" style="color:red;">❌ فشل تحميل قائمة التريندات.</div>';
+            }
+        }
 
-                trending.forEach(product => {
-                    let mediaHTML = `<div class="h-56 bg-stone-100 flex items-center justify-center text-5xl">${product.icon}</div>`;
-                    if (product.img && product.img.startsWith('http')) {
-                        mediaHTML = `<div class="h-56 overflow-hidden bg-stone-50 relative"><img src="${product.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"></div>`;
-                    }
-                    const card = document.createElement('div');
-                    card.className = "bg-white rounded-2xl border border-stone-200 overflow-hidden hover:shadow-xl transition duration-300 group flex flex-col justify-between relative animate-popup";
-                    card.innerHTML = `
-                        <div>
+        // تشغيل الوظائف عند فتح الصفحة
+        window.onload = function() {
+            loadStoreData();
+            updateCartBadge();
+        };
+    </script>
+</body>
+</html>
