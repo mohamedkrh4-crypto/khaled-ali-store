@@ -3,40 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KHALED ALI STORE | أرقى الأدوات المنزلية والزجاج</title>
-    <!-- استدعاء مكتبة التصميم Tailwind CSS -->
+    <title>KHALED ALI STORE | الرئيسية</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Cairo', sans-serif; }
-        html { scroll-behavior: smooth; }
-        /* أنيميشن ناعم لظهور نافذة التفاصيل */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .animate-popup { animation: fadeIn 0.25s ease-out forwards; }
-    </style>
+    <style>body { font-family: 'Cairo', sans-serif; } html { scroll-behavior: smooth; }</style>
 </head>
 <body class="bg-stone-50 text-stone-800 relative min-h-screen flex flex-col">
 
-    <!-- الهيدر / شريط التنقل -->
+    <!-- الهيدر -->
     <header class="bg-white shadow-sm sticky top-0 z-40">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <img src="logo.jpg" alt="Khaled Ali Store Logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" class="h-11 w-11 rounded-full object-cover shadow-md border border-stone-100">
+                <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" class="h-11 w-11 rounded-full object-cover shadow-md border border-stone-100">
                 <div id="logo-fallback" class="hidden h-11 w-11 rounded-full bg-[#2A4B37] text-white flex items-center justify-center font-bold text-sm">KA</div>
                 <span class="text-xl font-bold text-[#2A4B37] tracking-wide">KHALED ALI STORE</span>
             </div>
             <div class="flex items-center gap-4">
-                <!-- أيقونة عربة التسوق في الهيدر -->
-                <button onclick="toggleCartDrawer()" class="relative p-2.5 bg-stone-100 text-stone-700 rounded-full hover:bg-stone-200 transition cursor-pointer" title="عرض السلة">
+                <!-- أيقونة عربة التسوق (تودي لصفحة المنتجات) -->
+                <a href="products.html" class="relative p-2.5 bg-stone-100 text-stone-700 rounded-full hover:bg-stone-200 transition flex items-center justify-center" title="عرض السلة">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                     </svg>
                     <span id="cart-count-header" class="absolute -top-1 -right-1 bg-amber-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold hidden">0</span>
-                </button>
-                <a href="#products" class="bg-[#2A4B37] hover:bg-[#1E3527] text-white px-6 py-2 rounded-full font-medium transition shadow-md text-sm sm:text-base">تسوق الآن 🛒</a>
+                </a>
+                <a href="products.html" class="bg-[#2A4B37] hover:bg-[#1E3527] text-white px-6 py-2 rounded-full font-medium transition shadow-md text-sm sm:text-base">تسوق الآن 🛒</a>
             </div>
         </div>
     </header>
@@ -46,399 +36,147 @@
         <div class="md:w-1/2 space-y-6">
             <span class="bg-emerald-100 text-emerald-900 text-sm font-semibold px-4 py-1.5 rounded-full">أهلاً بكم في KHALED ALI STORE</span>
             <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">تشكيلة فاخرة من الأدوات المنزلية والزجاج العصري</h1>
-            <p class="text-lg text-stone-600">نوفر لكم أرقى أطقم العشاء، الكاسات، مستلزمات المطبخ، والقطع الديكورية الفخمة التي تمنح منزلك لمسة جمالية فريدة.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
-                <a href="#products" class="bg-[#2A4B37] hover:bg-[#1E3527] text-white text-center px-10 py-3.5 rounded-xl font-bold transition shadow-lg text-lg">تصفح المنتجات 🛍️</a>
+            <p class="text-lg text-stone-600">نوفر لكم أرقى أطقم العشاء، الكاسات، ومستلزمات المطبخ الفخمة التي تمنح منزلك لمسة جمالية فريدة.</p>
+            <div class="flex pt-2 justify-center md:justify-start">
+                <a href="products.html" class="bg-[#2A4B37] hover:bg-[#1E3527] text-white text-center px-10 py-3.5 rounded-xl font-bold transition shadow-lg text-lg">تصفح المتجر بالكامل 🛍️</a>
             </div>
         </div>
         <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
-            <div class="relative p-2 bg-white rounded-3xl shadow-2xl border border-stone-100 w-full max-w-md h-80 sm:h-96 overflow-hidden transform hover:scale-105 transition duration-300">
+            <div class="relative p-2 bg-white rounded-3xl shadow-2xl border border-stone-100 w-full max-w-md h-80 sm:h-96 overflow-hidden">
                 <img src="logo.jpg" alt="Khaled Ali Store" onerror="this.src='https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?q=80&w=600'" class="rounded-2xl w-full h-full object-cover">
             </div>
         </div>
     </section>
 
-    <!-- قسم المنتجات -->
-    <section id="products" class="bg-white py-16 shadow-inner">
+    <!-- قسم المعروض حالياً (3 منتجات فقط) -->
+    <section class="bg-white py-16 shadow-inner">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-stone-900 mb-2">أحدث معروضاتنا</h2>
-            <p class="text-stone-500 text-center mb-12">اكتشفوا تشكيلتنا المميزة المختارة بعناية لتناسب ذوقكم الرفيع</p>
+            <h2 class="text-3xl font-bold text-center text-stone-900 mb-2">المعروض حالياً</h2>
+            <p class="text-stone-500 text-center mb-12">لمحة سريعة عن المنتجات المتوفرة الآن في صالة العرض</p>
             
-            <!-- رسالة التحميل -->
-            <div id="loading-status" class="text-center py-8 text-stone-500 text-lg">
-                ⏳ جاري تحديث معروضات المتجر الآن...
+            <div id="loading-status" class="text-center py-8 text-stone-500 text-lg">⏳ جاري تحميل المعروضات...</div>
+
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 hidden">
+                <!-- المنتجات الـ 3 تظهر هنا -->
             </div>
 
-            <!-- شبكة المنتجات -->
-            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 hidden">
-                <!-- المنتجات تظهر هنا تلقائياً -->
+            <!-- زرار الانتقال لصفحة المنتجات الكاملة -->
+            <div class="text-center mt-12">
+                <a href="products.html" class="inline-flex items-center gap-2 border-2 border-[#2A4B37] text-[#2A4B37] hover:bg-[#2A4B37] hover:text-white px-8 py-3 rounded-xl font-bold transition duration-300">
+                    عرض جميع المنتجات والأسعار 📂
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- ================= قسم قنوات التليجرام والتواصل الاحترافي ================= -->
+    <!-- قسم قنوات التليجرام والتواصل -->
     <section class="bg-stone-100 py-16 border-t border-stone-200">
         <div class="container mx-auto px-6">
             <h2 class="text-2xl font-bold text-center text-stone-900 mb-2">تابعوا أسعارنا وحصرياتنا أولاً بأول 📢</h2>
-            <p class="text-stone-500 text-center mb-10">اشتركوا في قنوات التليجرام الرسمية وتواصلوا معنا فوراً للدعم والمبيعات</p>
+            <p class="text-stone-500 text-center mb-10">اشتركوا في قنواتنا الرسمية وتواصلوا معنا مباشرة</p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- قناة القطاعي -->
                 <a href="https://t.me/+Tg51D7mJwR5NOWUo" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-sky-500 group-hover:text-white transition duration-300">🛍️</div>
+                    <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-sky-500 group-hover:text-white transition">🛍️</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">قناة التليجرام (بالقطعة)</h3>
-                    <p class="text-sm text-stone-500 mb-4">أرقى التشكيلات والقطع الفردية لمنزلك بأسعار منافسة.</p>
-                    <span class="text-xs font-semibold text-sky-600 group-hover:underline mt-auto">اضغط للانضمام فوراً ←</span>
+                    <span class="text-xs font-semibold text-sky-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <!-- قناة الجملة / الكرتونة -->
                 <a href="https://t.me/+japBuh8s_btiNzZk" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition duration-300">📦</div>
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition">📦</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">قناة الجملة (بالكرتونة)</h3>
-                    <p class="text-sm text-stone-500 mb-4">مخصصة للتجار والطلبات الكبيرة بأسعار الجملة الأصلية.</p>
-                    <span class="text-xs font-semibold text-blue-600 group-hover:underline mt-auto">اضغط للانضمام فوراً ←</span>
+                    <span class="text-xs font-semibold text-blue-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <!-- قناة البلاستيك -->
                 <a href="https://t.me/+qSb8Id_HmTpjMWY0" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition duration-300">✨</div>
+                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition">✨</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">قناة التليجرام (للبلاستيك)</h3>
-                    <p class="text-sm text-stone-500 mb-4">تشكيلة واسعة من الأدوات والمنظمات البلاستيكية العصرية.</p>
-                    <span class="text-xs font-semibold text-indigo-600 group-hover:underline mt-auto">اضغط للانضمام فوراً ←</span>
+                    <span class="text-xs font-semibold text-indigo-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <!-- مبيعات الواتساب الفورية -->
+                <!-- تم التعديل إلى واتساب فقط بناءً على طلبك -->
                 <a href="https://wa.me/201090140339" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition duration-300">💬</div>
-                    <h3 class="text-lg font-bold text-stone-900 mb-2">الدعم الفوري والمبيعات</h3>
-                    <p class="text-sm text-stone-500 mb-4">لأي استفسار عام أو طلب مخصص تواصل معنا مباشرة.</p>
+                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition">💬</div>
+                    <h3 class="text-lg font-bold text-stone-900 mb-2">واتساب</h3>
                     <span class="text-xs font-semibold text-emerald-600 group-hover:underline mt-auto">افتح شات الواتساب ←</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- ================= سيستم صفحة تفاصيل المنتج المطور (Modal) ================= -->
-    <div id="product-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden transition-all duration-300">
-        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col md:flex-row overflow-hidden animate-popup">
-            <!-- زر الإغلاق -->
-            <button onclick="closeModal()" class="absolute top-4 left-4 bg-white/80 hover:bg-stone-200 text-stone-700 h-10 w-10 rounded-full flex items-center justify-center z-10 transition font-bold text-lg shadow">✕</button>
-            
-            <!-- صورة المنتج الممتدة في التفاصيل لتناسب شاشات الجميع -->
-            <div class="w-full md:w-3/5 h-72 md:h-auto bg-stone-100 flex items-center justify-center relative overflow-hidden" id="modal-media-container">
-                <!-- تظهر الصورة هنا بالكامل -->
-            </div>
-            
-            <!-- بيانات المنتج ووصفه الطويل -->
-            <div class="w-full md:w-2/5 p-8 flex flex-col justify-between space-y-6 bg-white">
-                <div class="space-y-4">
-                    <h3 id="modal-product-name" class="text-2xl font-bold text-stone-900 leading-tight">اسم المنتج</h3>
-                    <div class="w-12 h-1 bg-[#2A4B37] rounded"></div>
-                    <p id="modal-product-desc" class="text-stone-600 text-sm leading-relaxed whitespace-pre-line">الوصف بالكامل.</p>
-                </div>
-                
-                <div class="border-t border-stone-100 pt-6 flex flex-col space-y-4">
-                    <div class="flex items-center justify-between">
-                        <div class="flex flex-col">
-                            <span class="text-xs text-stone-400">السعر الفريد</span>
-                            <span id="modal-product-price" class="text-2xl font-bold text-[#2A4B37]">0.00 EGP</span>
-                        </div>
-                    </div>
-                    <!-- زر الإضافة إلى السلة الاحترافي -->
-                    <button id="modal-add-to-cart-btn" onclick="" class="w-full bg-[#2A4B37] text-white py-3.5 rounded-xl font-bold hover:bg-[#1E3527] transition shadow-md flex items-center justify-center gap-2 text-base cursor-pointer">
-                        إضافة إلى سلة المشتريات 🛍️
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ================= سلة المشتريات الجانبية المتكاملة (Cart Drawer) ================= -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
-        <!-- الغطاء الشفاف الخلفي -->
-        <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>
-        <!-- لوحة السلة اليمنى -->
-        <div class="absolute inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col justify-between transform transition-transform duration-300">
-            <div class="p-6 border-b border-stone-100 flex justify-between items-center bg-stone-50">
-                <div class="flex items-center gap-2">
-                    <span class="text-xl">🛒</span>
-                    <h3 class="text-lg font-bold text-stone-900">سلة المشتريات</h3>
-                    <span id="cart-count-badge" class="bg-[#2A4B37] text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
-                </div>
-                <button onclick="toggleCartDrawer()" class="text-stone-400 hover:text-stone-600 font-bold text-xl cursor-pointer">✕</button>
-            </div>
-
-            <!-- قائمة منتجات السلة -->
-            <div id="cart-items-container" class="p-6 overflow-y-auto flex-1 space-y-4">
-                <!-- الكروت المضافة بتظهر هنا بالـ JS -->
-                <div class="text-center py-12 text-stone-400 space-y-2">
-                    <p class="text-4xl">🛒</p>
-                    <p class="text-sm">سلتك فارغة حالياً، ابدأ بإضافة المنتجات!</p>
-                </div>
-            </div>
-
-            <!-- فواتير الحساب وإتمام الطلب المجمع على الواتساب -->
-            <div class="p-6 border-t border-stone-100 bg-stone-50 space-y-4">
-                <div class="flex justify-between items-center text-stone-900 font-bold text-lg">
-                    <span>إجمالي الحساب:</span>
-                    <span id="cart-total-price" class="text-[#2A4B37]">0 EGP</span>
-                </div>
-                <button onclick="checkoutCartViaWhatsApp()" class="w-full bg-[#2A4B37] hover:bg-[#1E3527] text-white py-4 rounded-xl font-bold transition shadow-lg flex items-center justify-center gap-2 text-base cursor-pointer">
-                    إرسال الطلب عبر واتساب ⚡
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- الزر العائم لعربة التسوق (يظهر لما السلة يكون فيها منتجات) -->
-    <button onclick="toggleCartDrawer()" id="floating-cart-btn" class="fixed bottom-6 right-6 z-40 bg-amber-600 hover:bg-amber-700 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transform hover:scale-110 transition duration-300 hidden cursor-pointer" title="فتح سلة المشتريات">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-        </svg>
-        <span id="cart-count-floating" class="absolute -top-1 -left-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
-    </button>
-
-    <!-- الفوتر -->
     <footer class="bg-stone-900 text-stone-400 py-8 text-center text-sm mt-auto">
         <p>© 2026 KHALED ALI STORE. جميع الحقوق محفوظة.</p>
     </footer>
 
-    <!-- ================= السكريبت المطور والربط الذكي بالكامل ================= -->
     <script>
         const googleSheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSxdTJvpCwEax5QOTSuzwuRxY_bJGLVJpso3A5SitG72v998xuDD7XNBORA4RFJcKCarLWE8dQR_0iV/pub?output=csv";
         
-        let globalProducts = [];
-        let cart = []; // مصفوفة المنتجات داخل السلة
+        // تحديث عداد السلة من الـ localStorage الخاص بكل زبون
+        function updateHomeCartCounter() {
+            const cart = JSON.parse(localStorage.getItem('khaled_store_cart')) || [];
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const countHeader = document.getElementById('cart-count-header');
+            countHeader.innerText = totalCount;
+            if(totalCount > 0) countHeader.classList.remove('hidden'); else countHeader.classList.add('hidden');
+        }
 
-        async function fetchProductsFromSheets() {
+        async function fetchFeaturedProducts() {
             const loadingText = document.getElementById('loading-status');
             const grid = document.getElementById('products-grid');
-
             try {
                 const response = await fetch(googleSheetCsvUrl);
                 const csvText = await response.text();
-                
                 const rows = csvText.split(/\r?\n/).map(row => row.trim()).filter(row => row);
-                globalProducts = [];
-
-                for (let i = 1; i < rows.length; i++) {
+                
+                let featuredProducts = [];
+                // جلب أول 3 منتجات فقط للعرض على الرئيسية
+                const limit = Math.min(rows.length, 4); 
+                for (let i = 1; i < limit; i++) {
                     const columns = rows[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                    
                     if (columns.length >= 2) {
-                        globalProducts.push({
-                            id: i - 1,
+                        featuredProducts.push({
                             name: columns[0] ? columns[0].replace(/^"|"$/g, '').trim() : 'منتج جديد',
                             price: columns[1] ? columns[1].replace(/^"|"$/g, '').trim() : 'حسب الطلب',
-                            desc: columns[2] ? columns[2].replace(/^"|"$/g, '').trim() : 'لا يوجد وصف متاح حالياً لهذا المنتج.',
+                            desc: columns[2] ? columns[2].replace(/^"|"$/g, '').trim() : '',
                             img: columns[3] ? columns[3].replace(/^"|"$/g, '').trim() : '',
                             icon: columns[4] ? columns[4].replace(/^"|"$/g, '').trim() : '📦'
                         });
                     }
                 }
 
-                if (globalProducts.length === 0) {
-                    loadingText.innerText = "🛍️ شيت البيانات فارغ حالياً، أضف منتجاتك في جوجل شيتس لتظهر هنا فوراً.";
-                } else {
-                    loadingText.classList.add('hidden');
-                    renderProducts(globalProducts);
-                    grid.classList.remove('hidden');
-                }
-
-            } catch (error) {
-                console.error("خطأ في جلب البيانات:", error);
-                loadingText.innerText = "❌ عذراً، فشل الاتصال بقاعدة البيانات. تأكد من اتصال الإنترنت أو إعدادات النشر.";
-            }
-        }
-
-        function renderProducts(items) {
-            const grid = document.getElementById('products-grid');
-            grid.innerHTML = '';
-
-            items.forEach(product => {
-                // تفعيل أنيميشن الزوم الاحترافي على الصورة بوضع الكلاسات السلسة
-                let mediaHTML = `<div class="h-56 bg-stone-100 flex items-center justify-center text-5xl transition-transform duration-500 ease-in-out transform group-hover:scale-110">${product.icon || '📦'}</div>`;
+                loadingText.classList.add('hidden');
+                grid.innerHTML = '';
                 
-                if (product.img && product.img.startsWith('http')) {
-                    mediaHTML = `<div class="h-56 overflow-hidden bg-stone-50"><img src="${product.img}" class="w-full h-full object-cover transition-transform duration-500 ease-in-out transform group-hover:scale-110" onerror="this.parentElement.innerHTML='<div class=\'h-56 bg-stone-100 flex items-center justify-center text-5xl\'>📦</div>'" alt="${product.name}"></div>`;
-                }
-
-                const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl border border-stone-200/70 overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer group flex flex-col justify-between";
-                card.setAttribute('onclick', `openModal(${product.id})`);
-                
-                card.innerHTML = `
-                    <div>
-                        ${mediaHTML}
-                        <div class="p-5">
-                            <h3 class="text-base font-bold text-stone-900 mb-1.5 group-hover:text-[#2A4B37] transition line-clamp-1">${product.name}</h3>
-                            <p class="text-xs text-stone-500 line-clamp-2 mb-4 h-8">${product.desc}</p>
+                featuredProducts.forEach(product => {
+                    let mediaHTML = `<div class="h-56 bg-stone-100 flex items-center justify-center text-5xl">${product.icon}</div>`;
+                    if (product.img && product.img.startsWith('http')) {
+                        mediaHTML = `<div class="h-56 overflow-hidden bg-stone-50"><img src="${product.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"></div>`;
+                    }
+                    const card = document.createElement('div');
+                    card.className = "bg-white rounded-2xl border border-stone-200 overflow-hidden hover:shadow-xl transition duration-300 group flex flex-col justify-between";
+                    card.innerHTML = `
+                        <div>
+                            ${mediaHTML}
+                            <div class="p-5">
+                                <h3 class="text-base font-bold text-stone-900 mb-1.5 group-hover:text-[#2A4B37] transition">${product.name}</h3>
+                                <p class="text-xs text-stone-500 line-clamp-2">${product.desc}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="px-5 pb-5 pt-2 border-t border-stone-50 flex justify-between items-center bg-stone-50/50">
-                        <span class="text-base font-bold text-[#2A4B37]">${product.price}</span>
-                        <button onclick="event.stopPropagation(); addToCart(${product.id});" class="bg-[#2A4B37] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#1E3527] transition shadow-sm cursor-pointer">
-                            إضافة للسلة 🛒
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // إظهار نافذة التفاصيل الكبيرة والمهيأة للموبايل بالكامل والكمبيوتر
-        function openModal(id) {
-            const product = globalProducts.find(p => p.id === id);
-            if (!product) return;
-
-            document.getElementById('modal-product-name').innerText = product.name;
-            document.getElementById('modal-product-desc').innerText = product.desc;
-            document.getElementById('modal-product-price').innerText = product.price;
-            
-            const mediaContainer = document.getElementById('modal-media-container');
-            if (product.img && product.img.startsWith('http')) {
-                // جعل الصورة بوضعية contain للموبايل عشان تظهر بكامل تفاصيلها بدون قص
-                mediaContainer.innerHTML = `<img src="${product.img}" class="w-full h-full object-contain md:object-cover p-2 md:p-0" onerror="this.parentElement.innerHTML='<span class=\'text-6xl\'>📦</span>'">`;
-            } else {
-                mediaContainer.innerHTML = `<span class="text-6xl">${product.icon || '📦'}</span>`;
+                        <div class="p-5 border-t border-stone-50 flex justify-between items-center bg-stone-50/50">
+                            <span class="text-base font-bold text-[#2A4B37]">${product.price}</span>
+                            <a href="products.html" class="bg-[#2A4B37] text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-[#1E3527]">شراء الآن 🛒</a>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+                grid.classList.remove('hidden');
+            } catch (e) {
+                loadingText.innerText = "⚠️ فشل تحميل المعروضات الحالية.";
             }
-
-            // ربط زرار المودال بإضافة الصنف للسلة
-            const addBtn = document.getElementById('modal-add-to-cart-btn');
-            addBtn.setAttribute('onclick', `addToCart(${product.id}); closeModal();`);
-
-            const modal = document.getElementById('product-modal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {
-            const modal = document.getElementById('product-modal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }
-
-        // ================= إدارة عمليات عربة التسوق التلقائية =================
-        function toggleCartDrawer() {
-            const drawer = document.getElementById('cart-drawer');
-            drawer.classList.toggle('hidden');
-        }
-
-        function addToCart(id) {
-            const product = globalProducts.find(p => p.id === id);
-            if (!product) return;
-
-            const existingItem = cart.find(item => item.id === id);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-
-            updateCartUI();
-            
-            // ومضة خفيفة على زر السلة لتنبيه المستخدم بالإدخال الناجح
-            const headerCart = document.querySelector('#cart-count-header').parentElement;
-            headerCart.classList.add('scale-110', 'bg-amber-100');
-            setTimeout(() => headerCart.classList.remove('scale-110', 'bg-amber-100'), 200);
-        }
-
-        function changeQuantity(id, delta) {
-            const item = cart.find(item => item.id === id);
-            if (!item) return;
-
-            item.quantity += delta;
-            if (item.quantity <= 0) {
-                cart = cart.filter(item => item.id !== id);
-            }
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const container = document.getElementById('cart-items-container');
-            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-            
-            // تحديث العدادات في كل مكان بالموقع
-            document.getElementById('cart-count-badge').innerText = totalCount;
-            
-            const countHeader = document.getElementById('cart-count-header');
-            countHeader.innerText = totalCount;
-            if(totalCount > 0) countHeader.classList.remove('hidden'); else countHeader.classList.add('hidden');
-
-            const floatingCart = document.getElementById('floating-cart-btn');
-            document.getElementById('cart-count-floating').innerText = totalCount;
-            if(totalCount > 0) floatingCart.classList.remove('hidden'); else floatingCart.classList.add('hidden');
-
-            if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 text-stone-400 space-y-2">
-                        <p class="text-4xl">🛒</p>
-                        <p class="text-sm">سلتك فارغة حالياً، ابدأ بإضافة المنتجات!</p>
-                    </div>
-                `;
-                document.getElementById('cart-total-price').innerText = '0 EGP';
-                return;
-            }
-
-            container.innerHTML = '';
-            let totalMoney = 0;
-
-            cart.forEach(item => {
-                // استخلاص الرقم من نص السعر (مثلاً "450 EGP" تصبح 450) لحساب الإجمالي
-                const numPrice = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
-                const itemTotal = numPrice * item.quantity;
-                totalMoney += itemTotal;
-
-                const itemRow = document.createElement('div');
-                itemRow.className = "flex items-center gap-3 bg-stone-50 p-3 rounded-xl border border-stone-100 animate-popup";
-                itemRow.innerHTML = `
-                    <div class="w-16 h-16 rounded-lg bg-white overflow-hidden border border-stone-200 shrink-0 flex items-center justify-center text-xl">
-                        ${item.img ? `<img src="${item.img}" class="w-full h-full object-cover">` : item.icon}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h4 class="text-sm font-bold text-stone-900 truncate">${item.name}</h4>
-                        <p class="text-xs text-stone-500 mt-0.5">${item.price}</p>
-                        <p class="text-xs font-semibold text-stone-700 mt-1">المجموع: ${itemTotal} EGP</p>
-                    </div>
-                    <div class="flex items-center gap-1.5 bg-white border border-stone-200 rounded-lg p-1">
-                        <button onclick="changeQuantity(${item.id}, 1)" class="w-6 h-6 bg-stone-50 text-stone-800 font-bold text-xs rounded hover:bg-stone-200 cursor-pointer">+</button>
-                        <span class="text-xs font-bold px-1 w-4 text-center">${item.quantity}</span>
-                        <button onclick="changeQuantity(${item.id}, -1)" class="w-6 h-6 bg-stone-50 text-stone-800 font-bold text-xs rounded hover:bg-stone-200 cursor-pointer">-</button>
-                    </div>
-                `;
-                container.appendChild(itemRow);
-            });
-
-            document.getElementById('cart-total-price').innerText = `${totalMoney} EGP`;
-        }
-
-        // تجميع الطلب المجمع وإرساله برسالة في غاية الاحترافية والدقة عبر الواتساب
-        function checkoutCartViaWhatsApp() {
-            if (cart.length === 0) {
-                alert('عذراً، سلتك فارغة تماماً!');
-                return;
-            }
-
-            let textMessage = `أهلاً KHALED ALI STORE، أريد تقديم طلب شراء بالمنتجات التالية:\n`;
-            textMessage += `=========================\n`;
-            
-            cart.forEach((item, index) => {
-                textMessage += `${index + 1}) ${item.name}\n   - العدد: ${item.quantity}\n   - السعر الفردي: ${item.price}\n`;
-            });
-            
-            textMessage += `=========================\n`;
-            textMessage += `💰 إجمالي حساب الطلب: ${document.getElementById('cart-total-price').innerText}\n\n`;
-            textMessage += `الرجاء تأكيد الطلب وتوضيح موعد التسليم الخلاب. شكراً لكم! ✨`;
-
-            const finalUrl = `https://wa.me/201090140339?text=${encodeURIComponent(textMessage)}`;
-            window.open(finalUrl, '_blank');
-        }
-
-        // قفل المودال عند الضغط في أي مكان خارجي
-        document.getElementById('product-modal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        fetchProductsFromSheets();
+        updateHomeCartCounter();
+        fetchFeaturedProducts();
     </script>
 </body>
 </html>
