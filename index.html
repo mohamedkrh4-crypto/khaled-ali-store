@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KHALED ALI STORE | الواجهة السينمائية الفاخرة</title>
+    <title>KHALED ALI STORE | الواجهة السينمائية الفاخرة المطورة</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;700&display=swap" rel="stylesheet">
     <style>
@@ -11,7 +11,7 @@
         html { scroll-behavior: smooth; }
 
         /* ==========================================================================
-           المحرك الحركي المتطور - Kinetic Animation Core
+           المحرك الحركي المتطور الاصلي - Kinetic Animation Core (لم يتم تعديله)
            ========================================================================== */
         
         /* تأثير الظهور التدرجي عند السكرول مع الحفاظ على الانسيابية */
@@ -108,6 +108,44 @@
             -webkit-backdrop-filter: blur(20px) !important;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
         }
+
+        /* ==========================================================================
+           الإضافات الجديدة بالكامل (تراكمية بدون مسح أو تعديل ما سبق)
+           ========================================================================== */
+        
+        /* تأثير "العدسة الفاخرة والنفس السينمائي" للصورة الكبيرة عند حرك الماوس */
+        .animate-ultra-float {
+            transition: box-shadow 1.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+        }
+        .animate-ultra-float:hover {
+            /* انتشار ظل عميق وناعم جداً يتوسع بهدوء رائع */
+            box-shadow: 0 45px 95px rgba(16, 185, 129, 0.12), 0 20px 50px rgba(0, 0, 0, 0.02) !important;
+        }
+        .animate-ultra-float img {
+            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+            will-change: transform;
+        }
+        .animate-ultra-float:hover img {
+            /* زوم داخلي انسيابي بطيء وفخم جداً داخل الإطار الثابت المعلق */
+            transform: scale(1.04) !important;
+        }
+
+        /* تأثير الانعكاس الزجاجي اللؤلؤي العابر على الصورة ببطء شديد كل 8 ثوانٍ */
+        .animate-ultra-float::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 55%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.22), transparent);
+            transform: skewX(-25deg);
+            pointer-events: none;
+            animation: glassShimmerPass 8s ease-in-out infinite;
+        }
+        @keyframes glassShimmerPass {
+            0% { left: -150%; }
+            15% { left: 150%; }
+            100% { left: 150%; }
+        }
     </style>
 </head>
 <body class="text-stone-800 relative min-h-screen flex flex-col overflow-x-hidden select-none">
@@ -117,7 +155,7 @@
     <header class="bg-white/90 shadow-xs sticky top-0 z-40 w-full border-b border-stone-100/50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3">
-                <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" 
+                <img src="logo.jpg" alt="Logo" id="header-mini-logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" 
                      class="reveal-node anim-fade-up h-11 w-11 rounded-full object-cover shadow-xs border border-stone-100" style="transition-delay: 50ms;">
                 
                 <div id="logo-fallback" class="hidden h-11 w-11 rounded-full bg-[#2A4B37] text-white flex items-center justify-center font-bold text-sm">KA</div>
@@ -227,7 +265,7 @@
     </footer>
 
     <script>
-        // 1. تشغيل وتحديث الهيدر الزجاجي الفاخر
+        // 1. تشغيل وتحديث الهيدر الزجاجي الفاخر (أصلي)
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 20) {
@@ -237,7 +275,7 @@
             }
         });
 
-        // 2. محرك تشغيل أنميشن الـ Scroll Observer الفائق السلاسة
+        // 2. محرك تشغيل أنميشن الـ Scroll Observer الفائق السلاسة (أصلي)
         document.addEventListener("DOMContentLoaded", () => {
             const animatedElements = document.querySelectorAll('.reveal-node');
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.04 };
@@ -254,7 +292,7 @@
             animatedElements.forEach(element => intersectionObserver.observe(element));
         });
 
-        // 3. محرك الجزيئات الذكي التفاعلي خلف النصوص والمحتوى (Interactive Particles Canvas Engine)
+        // 3. محرك الجزيئات الذكي التفاعلي المطور (يدعم الحركة الأصلية + التفاعل الإضافي للضغط)
         const canvas = document.getElementById('ambient-particle-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
@@ -270,14 +308,17 @@
         resizeCanvas();
 
         class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
+            // تحديث الباني ليدعم إحداثيات الضغط الإضافية دون المساس بالوضع التلقائي الافتراضي
+            constructor(clickX = null, clickY = null) {
+                this.x = clickX !== null ? clickX : Math.random() * canvas.width;
+                this.y = clickY !== null ? clickY : Math.random() * canvas.height;
                 this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
+                // سرعة انتشار الجزيئات عند النقر تكون هادئة وانسيابية ومحسوبة بدقة
+                this.speedX = clickX !== null ? (Math.random() * 1.2 - 0.6) : (Math.random() * 0.4 - 0.2);
+                this.speedY = clickY !== null ? (Math.random() * 1.2 - 0.6) : (Math.random() * 0.4 - 0.2);
                 this.baseOpacity = Math.random() * 0.2 + 0.05;
-                this.opacity = this.baseOpacity;
+                this.opacity = clickX !== null ? 0.8 : this.baseOpacity;
+                this.isClickParticle = clickX !== null;
             }
             update() {
                 this.x += this.speedX;
@@ -285,20 +326,25 @@
                 if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
                 if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
 
-                // التفاعل مع مؤشر الفأرة وسرعته
-                if (mouse.x && mouse.y) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < mouse.radius) {
-                        this.opacity = Math.min(0.6, this.opacity + 0.03);
-                        this.x -= dx * 0.01; // انجذاب حركي مرن
-                        this.y -= dy * 0.01;
+                if (this.isClickParticle) {
+                    // تلاشي تدريجي وبطيء جداً لجزيئات النقرات لراحة العين (تأثير ولادة النجوم البطيئة)
+                    this.opacity -= 0.004; 
+                } else {
+                    // التفاعل الأصلي الكامل والمثالي مع مؤشر الفأرة (بدون أي تعديل)
+                    if (mouse.x && mouse.y) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < mouse.radius) {
+                            this.opacity = Math.min(0.6, this.opacity + 0.03);
+                            this.x -= dx * 0.01; 
+                            this.y -= dy * 0.01;
+                        } else if (this.opacity > this.baseOpacity) {
+                            this.opacity -= 0.005;
+                        }
                     } else if (this.opacity > this.baseOpacity) {
                         this.opacity -= 0.005;
                     }
-                } else if (this.opacity > this.baseOpacity) {
-                    this.opacity -= 0.005;
                 }
             }
             draw() {
@@ -316,15 +362,24 @@
                 particlesArray.push(new Particle());
             }
         }
+        
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particlesArray.forEach(p => { p.update(); p.draw(); });
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                // تنظيف الجزيئات المنتهية للحفاظ على استقرار الأداء
+                if (particlesArray[i].isClickParticle && particlesArray[i].opacity <= 0) {
+                    particlesArray.splice(i, 1);
+                    i--;
+                }
+            }
             requestAnimationFrame(animateParticles);
         }
         initParticles();
         animateParticles();
 
-        // 4. محرك الـ 3D Kinetic Tilt للكروت التفاعلية الأربعة
+        // 4. محرك الـ 3D Kinetic Tilt الأصلي للكروت الأربعة (لم يتم لمسه أو تعديله)
         const cards = document.querySelectorAll('.tilt-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -333,8 +388,8 @@
                 const y = e.clientY - rect.top;
                 const xc = rect.width / 2;
                 const yc = rect.height / 2;
-                const angleX = (yc - y) / 14; // زاوية الـ ميل العمودي الآمنة
-                const angleY = (x - xc) / 14; // زاوية الـ ميل الأفقي
+                const angleX = (yc - y) / 14; 
+                const angleY = (x - xc) / 14; 
                 
                 card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.03)`;
                 card.style.boxShadow = `0 25px 50px rgba(16, 185, 129, 0.08)`;
@@ -343,6 +398,21 @@
                 card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
                 card.style.boxShadow = 'none';
             });
+        });
+
+        // 5. محرك التفاعل الإضافي الفاخر عند الضغط (تأثير ولادة النجوم البطيئة + نبض الضوء السينمائي للهيكل)
+        window.addEventListener('click', (e) => {
+            // توليد 15 جزيء ينساب بنعومة فائقة من نقطة النقر مباشرة بدون سرعة عشوائية مفاجئة
+            for (let i = 0; i < 15; i++) {
+                particlesArray.push(new Particle(e.clientX, e.clientY));
+            }
+            
+            // نبضة ضوء هادئة جداً للخلفية كاملة تزيد وتنخفض بنعومة (Cinematic Ambient Pulse)
+            canvas.style.transition = 'opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+            canvas.style.opacity = '0.9';
+            setTimeout(() => {
+                canvas.style.opacity = '0.6';
+            }, 500);
         });
     </script>
 </body>
