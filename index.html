@@ -10,109 +10,159 @@
         body { font-family: 'Cairo', sans-serif; overflow-x: hidden; } 
         html { scroll-behavior: smooth; }
 
-        /* 1. أنميشن الجاذبية العائمة للصورة */
+        /* ==========================================================================
+           سيستم الأنميشن الاحترافي (Scroll & Load Animations)
+           ========================================================================== */
+        
+        /* الحالة الافتراضية لأي عنصر قبل ما يظهر (مخفي ومزاح) */
+        .reveal-node {
+            opacity: 0;
+            will-change: transform, opacity;
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* أنواع حركات الدخول */
+        .anim-fade-up { transform: translateY(40px); }
+        .anim-fade-down { transform: translateY(-40px); }
+        .anim-fade-right { transform: translateX(40px); }
+        .anim-fade-left { transform: translateX(-40px); }
+        .anim-scale-in { transform: scale(0.85); }
+
+        /* الحالة النشطة عندما يظهر العنصر في الشاشة (تلقائياً عبر JS) */
+        .reveal-node.active {
+            opacity: 1;
+            transform: translateY(0) translateX(0) scale(1);
+        }
+
+        /* 2. أنميشن الجاذبية العائمة المستمر للصورة الكبيرة */
         @keyframes floatEffect {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(0.5deg); }
         }
         .animate-float {
-            animation: floatEffect 4s ease-in-out infinite;
+            animation: floatEffect 5s ease-in-out infinite;
         }
 
-        /* 2. أنميشن الظهور التدريجي المتتابع عند فتح الصفحة */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* 3. تأثير التموج الضوئي السحري على العنوان الرئيسي (Shimmer) */
+        @keyframes shimmerGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .reveal-item {
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .shimmer-text {
+            background: linear-gradient(90deg, #1c3325, #2A4B37, #10b981, #2A4B37, #1c3325);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmerGlow 8s ease infinite;
         }
-        .delay-1 { animation-delay: 100ms; }
-        .delay-2 { animation-delay: 250ms; }
-        .delay-3 { animation-delay: 400ms; }
-        .delay-4 { animation-delay: 550ms; }
-        .delay-5 { animation-delay: 700ms; }
-        .delay-6 { animation-delay: 800ms; }
-        .delay-7 { animation-delay: 900ms; }
-        .delay-8 { animation-delay: 1000ms; }
 
-        /* 3. حركة الارتداد المرنة للكروت (Elastic Transition) */
+        /* 4. حركة الارتداد المرنة الفخمة للكروت والأزرار */
         .elastic-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         }
 
-        /* 4. تأثير الهيدر الزجاجي المتغير عند السكرول */
+        /* 5. تأثير الهيدر الزجاجي المتغير عند السكرول */
         header {
-            transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            transition: background-color 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
             border-bottom: 1px solid transparent;
         }
         header.scrolled {
             background-color: rgba(255, 255, 255, 0.75) !important;
-            backdrop-filter: blur(14px) !important;
-            -webkit-backdrop-filter: blur(14px) !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-            border-bottom: 1px solid rgba(231, 229, 228, 0.5); /* stone-200 بنسبة شفافية */
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(231, 229, 228, 0.6);
         }
     </style>
 </head>
 <body class="bg-stone-50 text-stone-800 relative min-h-screen flex flex-col">
 
+    <!-- الهيدر (الشريط العلوي الزجاجي الذكي المليء بالأنميشن) -->
     <header class="bg-white shadow-sm sticky top-0 z-40">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" class="h-11 w-11 rounded-full object-cover shadow-md border border-stone-100">
+                <!-- أنميشن دخول للوجو واسم البراند بشكل منفصل ومتتابع -->
+                <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" 
+                     class="reveal-node anim-fade-right h-11 w-11 rounded-full object-cover shadow-md border border-stone-100" style="transition-delay: 50ms;">
+                
                 <div id="logo-fallback" class="hidden h-11 w-11 rounded-full bg-[#2A4B37] text-white flex items-center justify-center font-bold text-sm">KA</div>
-                <span class="text-xl font-bold text-[#2A4B37] tracking-wide">KHALED ALI STORE</span>
+                
+                <span class="reveal-node anim-fade-right text-xl font-bold text-[#2A4B37] tracking-wide" style="transition-delay: 200ms;">KHALED ALI STORE</span>
             </div>
         </div>
     </header>
 
+    <!-- القسم التعريفي الرئيسي (Hero Section) - تم تفكيك كل جملة وكلمة لأنميشن منفصل -->
     <section class="container mx-auto px-6 py-16 text-center md:text-right md:flex md:items-center md:justify-between gap-12 flex-1">
         <div class="md:w-1/2 space-y-6">
-            <span class="bg-emerald-100 text-emerald-900 text-sm font-semibold px-4 py-1.5 rounded-full reveal-item delay-1 inline-block">أهلاً بكم في KHALED ALI STORE</span>
-            <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight reveal-item delay-2">تشكيلة فاخرة من الأدوات المنزلية والزجاج العصري</h1>
-            <p class="text-lg text-stone-600 reveal-item delay-3">نوفر لكم أرقى أطقم العشاء، الكاسات، ومستلزمات المطبخ الفخمة التي تمنح منزلك لمسة جمالية فريدة.</p>
+            <span class="reveal-node anim-fade-left bg-emerald-100 text-emerald-900 text-sm font-semibold px-4 py-1.5 rounded-full inline-block" style="transition-delay: 300ms;">
+                أهلاً بكم في KHALED ALI STORE
+            </span>
+            
+            <!-- العنوان بالتأثير الضوئي الشيمر وأنميشن الصعود -->
+            <h1 class="reveal-node anim-fade-up shimmer-text text-4xl md:text-5xl font-bold leading-tight" style="transition-delay: 450ms;">
+                تشكيلة فاخرة من الأدوات المنزلية والزجاج العصري
+            </h1>
+            
+            <p class="reveal-node anim-fade-up text-lg text-stone-600" style="transition-delay: 600ms;">
+                نوفر لكم أرقى أطقم العشاء، الكاسات، ومستلزمات المطبخ الفخمة التي تمنح منزلك لمسة جمالية فريدة.
+            </p>
         </div>
-        <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center reveal-item delay-4">
-            <div class="relative p-2 bg-white rounded-3xl shadow-2xl border border-stone-100 w-full max-w-md h-80 sm:h-96 overflow-hidden animate-float">
+        
+        <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+            <!-- الصورة تدخل بتقنية السكيل ثم تبدأ فوراً في العوم المستمر -->
+            <div class="reveal-node anim-scale-in relative p-2 bg-white rounded-3xl shadow-2xl border border-stone-100 w-full max-w-md h-80 sm:h-96 overflow-hidden animate-float" style="transition-delay: 750ms;">
                 <img src="logo.jpg" alt="Khaled Ali Store" onerror="this.src='https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?q=80&w=600'" class="rounded-2xl w-full h-full object-cover">
             </div>
         </div>
     </section>
 
+    <!-- قسم قنوات التواصل والروابط الرسمية (أنميشن متتابع مرن وتفاعلي مع الماوس) -->
     <section class="bg-stone-100 py-16 border-t border-stone-200">
         <div class="container mx-auto px-6">
-            <h2 class="text-2xl font-bold text-center text-stone-900 mb-2 reveal-item delay-4">تابعوا أسعارنا وحصرياتنا أولاً بأول 📢</h2>
-            <p class="text-stone-500 text-center mb-10 reveal-item delay-5">اشتركوا في قنواتنا الرسمية وتواصلوا معنا مباشرة</p>
+            <h2 class="reveal-node anim-fade-up text-2xl font-bold text-center text-stone-900 mb-2" style="transition-delay: 100ms;">
+                تابعوا أسعارنا وحصرياتنا أولاً بأول 📢
+            </h2>
+            <p class="reveal-node anim-fade-up text-stone-500 text-center mb-10" style="transition-delay: 250ms;">
+                اشتركوا في قنواتنا الرسمية وتواصلوا معنا مباشرة
+            </p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <a href="https://t.me/+Tg51D7mJwR5NOWUo" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_15px_30px_rgba(14,165,233,0.25)] hover:scale-[1.04] elastic-card group reveal-item delay-5">
-                    <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">🛍️</div>
+                <!-- كارت 1: تليجرام قطاعي -->
+                <a href="https://t.me/+Tg51D7mJwR5NOWUo" target="_blank" 
+                   class="reveal-node anim-fade-up bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_20px_40px_rgba(14,165,233,0.25)] hover:scale-[1.05] elastic-card group" 
+                   style="transition-delay: 350ms;">
+                    <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-sky-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">🛍️</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">قناة التليجرام (بالقطعة)</h3>
                     <span class="text-xs font-semibold text-sky-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <a href="https://t.me/+japBuh8s_btiNzZk" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_15px_30px_rgba(37,99,235,0.25)] hover:scale-[1.04] elastic-card group reveal-item delay-6">
-                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">📦</div>
+                <!-- كارت 2: تليجرام جملة -->
+                <a href="https://t.me/+japBuh8s_btiNzZk" target="_blank" 
+                   class="reveal-node anim-fade-up bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_20px_40px_rgba(37,99,235,0.25)] hover:scale-[1.05] elastic-card group" 
+                   style="transition-delay: 450ms;">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">📦</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">قناة الجملة (بالكرتونة)</h3>
                     <span class="text-xs font-semibold text-blue-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <a href="https://t.me/+qSb8Id_HmTpjMWY0" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_15px_30px_rgba(79,70,229,0.25)] hover:scale-[1.04] elastic-card group reveal-item delay-7">
-                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">✨</div>
+                <!-- كارت 3: تليجرام بلاستيك -->
+                <a href="https://t.me/+qSb8Id_HmTpjMWY0" target="_blank" 
+                   class="reveal-node anim-fade-up bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_20px_40px_rgba(79,70,229,0.25)] hover:scale-[1.05] elastic-card group" 
+                   style="transition-delay: 550ms;">
+                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">✨</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">قناة التليجرام (للبلاستيك)</h3>
                     <span class="text-xs font-semibold text-indigo-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <a href="https://wa.me/201090140339" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_15px_30px_rgba(16,185,129,0.3)] hover:scale-[1.04] elastic-card group reveal-item delay-8">
-                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">💬</div>
+                <!-- كارت 4: واتساب -->
+                <a href="https://wa.me/201090140339" target="_blank" 
+                   class="reveal-node anim-fade-up bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_20px_40px_rgba(16,185,129,0.3)] hover:scale-[1.05] elastic-card group" 
+                   style="transition-delay: 650ms;">
+                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">💬</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">واتساب</h3>
                     <span class="text-xs font-semibold text-emerald-600 group-hover:underline mt-auto">افتح شات الواتساب ←</span>
                 </a>
@@ -120,18 +170,49 @@
         </div>
     </section>
 
+    <!-- الفوتر مع أنميشن بسيط للنص عند الوصول إليه -->
     <footer class="bg-stone-900 text-stone-400 py-8 text-center text-sm mt-auto">
-        <p>© 2026 KHALED ALI STORE. جميع الحقوق محفوظة.</p>
+        <p class="reveal-node anim-fade-up" style="transition-delay: 100ms;">© 2026 KHALED ALI STORE. جميع الحقوق محفوظة.</p>
     </footer>
 
+    <!-- محرك السحر الذكي (Intersection Observer & Scroll Scripts) -->
     <script>
+        // 1. تشغيل تأثير الهيدر الزجاجي الذكي عند السكرول لأسفل
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            if (window.scrollY > 12) {
+            if (window.scrollY > 15) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
+        });
+
+        // 2. محرك تشغيل الأنميشن الذكي لكل عناصر الموقع بناءً على حركة عين المستخدم (Scroll Observer)
+        document.addEventListener("DOMContentLoaded", () => {
+            // تجميع كل العناصر التي تحتوي على الكلاس الأساسي للأنميشن
+            const animatedElements = document.querySelectorAll('.reveal-node');
+            
+            const observerOptions = {
+                root: null, // يراقب الشاشة بأكملها
+                rootMargin: '0px',
+                threshold: 0.08 // يشتغل الأنميشن أول ما يظهر 8% من العنصر في الشاشة
+            };
+
+            const intersectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // تفعيل الحركة بإضافة كلاس active
+                        entry.target.classList.add('active');
+                        // إلغاء مراقبة العنصر بعد أن يتحرك بنجاح ليحافظ على الأداء الخفيف للمتصفح
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // تفعيل المراقبة على كل عنصر في المصفوفة
+            animatedElements.forEach(element => {
+                intersectionObserver.observe(element);
+            });
         });
     </script>
 </body>
