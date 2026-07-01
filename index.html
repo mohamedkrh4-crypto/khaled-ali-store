@@ -7,13 +7,63 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Cairo', sans-serif; } 
+        body { font-family: 'Cairo', sans-serif; overflow-x: hidden; } 
         html { scroll-behavior: smooth; }
+
+        /* 1. أنميشن الجاذبية العائمة للصورة */
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        .animate-float {
+            animation: floatEffect 4s ease-in-out infinite;
+        }
+
+        /* 2. أنميشن الظهور التدريجي المتتابع عند فتح الصفحة */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .reveal-item {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 100ms; }
+        .delay-2 { animation-delay: 250ms; }
+        .delay-3 { animation-delay: 400ms; }
+        .delay-4 { animation-delay: 550ms; }
+        .delay-5 { animation-delay: 700ms; }
+        .delay-6 { animation-delay: 800ms; }
+        .delay-7 { animation-delay: 900ms; }
+        .delay-8 { animation-delay: 1000ms; }
+
+        /* 3. حركة الارتداد المرنة للكروت (Elastic Transition) */
+        .elastic-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        }
+
+        /* 4. تأثير الهيدر الزجاجي المتغير عند السكرول */
+        header {
+            transition: background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+            border-bottom: 1px solid transparent;
+        }
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            border-bottom: 1px solid rgba(231, 229, 228, 0.5); /* stone-200 بنسبة شفافية */
+        }
     </style>
 </head>
 <body class="bg-stone-50 text-stone-800 relative min-h-screen flex flex-col">
 
-    <!-- الهيدر (الشريط العلوي) -->
     <header class="bg-white shadow-sm sticky top-0 z-40">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
@@ -24,51 +74,45 @@
         </div>
     </header>
 
-    <!-- القسم التعريفي الرئيسي (Hero Section) -->
     <section class="container mx-auto px-6 py-16 text-center md:text-right md:flex md:items-center md:justify-between gap-12 flex-1">
         <div class="md:w-1/2 space-y-6">
-            <span class="bg-emerald-100 text-emerald-900 text-sm font-semibold px-4 py-1.5 rounded-full">أهلاً بكم في KHALED ALI STORE</span>
-            <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight">تشكيلة فاخرة من الأدوات المنزلية والزجاج العصري</h1>
-            <p class="text-lg text-stone-600">نوفر لكم أرقى أطقم العشاء، الكاسات، ومستلزمات المطبخ الفخمة التي تمنح منزلك لمسة جمالية فريدة.</p>
+            <span class="bg-emerald-100 text-emerald-900 text-sm font-semibold px-4 py-1.5 rounded-full reveal-item delay-1 inline-block">أهلاً بكم في KHALED ALI STORE</span>
+            <h1 class="text-4xl md:text-5xl font-bold text-stone-900 leading-tight reveal-item delay-2">تشكيلة فاخرة من الأدوات المنزلية والزجاج العصري</h1>
+            <p class="text-lg text-stone-600 reveal-item delay-3">نوفر لكم أرقى أطقم العشاء، الكاسات، ومستلزمات المطبخ الفخمة التي تمنح منزلك لمسة جمالية فريدة.</p>
         </div>
-        <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
-            <div class="relative p-2 bg-white rounded-3xl shadow-2xl border border-stone-100 w-full max-w-md h-80 sm:h-96 overflow-hidden">
+        <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center reveal-item delay-4">
+            <div class="relative p-2 bg-white rounded-3xl shadow-2xl border border-stone-100 w-full max-w-md h-80 sm:h-96 overflow-hidden animate-float">
                 <img src="logo.jpg" alt="Khaled Ali Store" onerror="this.src='https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?q=80&w=600'" class="rounded-2xl w-full h-full object-cover">
             </div>
         </div>
     </section>
 
-    <!-- قسم قنوات التواصل والروابط الرسمية -->
     <section class="bg-stone-100 py-16 border-t border-stone-200">
         <div class="container mx-auto px-6">
-            <h2 class="text-2xl font-bold text-center text-stone-900 mb-2">تابعوا أسعارنا وحصرياتنا أولاً بأول 📢</h2>
-            <p class="text-stone-500 text-center mb-10">اشتركوا في قنواتنا الرسمية وتواصلوا معنا مباشرة</p>
+            <h2 class="text-2xl font-bold text-center text-stone-900 mb-2 reveal-item delay-4">تابعوا أسعارنا وحصرياتنا أولاً بأول 📢</h2>
+            <p class="text-stone-500 text-center mb-10 reveal-item delay-5">اشتركوا في قنواتنا الرسمية وتواصلوا معنا مباشرة</p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- قناة التليجرام قطاعي -->
-                <a href="https://t.me/+Tg51D7mJwR5NOWUo" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-sky-500 group-hover:text-white transition">🛍️</div>
+                <a href="https://t.me/+Tg51D7mJwR5NOWUo" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_15px_30px_rgba(14,165,233,0.25)] hover:scale-[1.04] elastic-card group reveal-item delay-5">
+                    <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">🛍️</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">قناة التليجرام (بالقطعة)</h3>
                     <span class="text-xs font-semibold text-sky-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <!-- قناة التليجرام جملة -->
-                <a href="https://t.me/+japBuh8s_btiNzZk" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition">📦</div>
+                <a href="https://t.me/+japBuh8s_btiNzZk" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_15px_30px_rgba(37,99,235,0.25)] hover:scale-[1.04] elastic-card group reveal-item delay-6">
+                    <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">📦</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">قناة الجملة (بالكرتونة)</h3>
                     <span class="text-xs font-semibold text-blue-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <!-- قناة التليجرام بلاستيك -->
-                <a href="https://t.me/+qSb8Id_HmTpjMWY0" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition">✨</div>
+                <a href="https://t.me/+qSb8Id_HmTpjMWY0" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_15px_30px_rgba(79,70,229,0.25)] hover:scale-[1.04] elastic-card group reveal-item delay-7">
+                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">✨</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">قناة التليجرام (للبلاستيك)</h3>
                     <span class="text-xs font-semibold text-indigo-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
-                <!-- واتساب مباشر -->
-                <a href="https://wa.me/201090140339" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition duration-300 group">
-                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition">💬</div>
+                <a href="https://wa.me/201090140339" target="_blank" class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col items-center text-center hover:shadow-[0_15px_30px_rgba(16,185,129,0.3)] hover:scale-[1.04] elastic-card group reveal-item delay-8">
+                    <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">💬</div>
                     <h3 class="text-lg font-bold text-stone-900 mb-2">واتساب</h3>
                     <span class="text-xs font-semibold text-emerald-600 group-hover:underline mt-auto">افتح شات الواتساب ←</span>
                 </a>
@@ -76,10 +120,19 @@
         </div>
     </section>
 
-    <!-- الفوتر -->
     <footer class="bg-stone-900 text-stone-400 py-8 text-center text-sm mt-auto">
         <p>© 2026 KHALED ALI STORE. جميع الحقوق محفوظة.</p>
     </footer>
 
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 12) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
