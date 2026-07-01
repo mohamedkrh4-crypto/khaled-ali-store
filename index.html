@@ -11,34 +11,25 @@
         html { scroll-behavior: smooth; }
 
         /* ==========================================================================
-           المحرك الحركي المتطور - Kinetic Animation Core
+           المحرك الحركي المتطور الموحد - 100 Kinetic Animation Core
            ========================================================================== */
         
-        /* تأثير الظهور التدرجي عند السكرول مع الحفاظ على الانسيابية */
+        /* تأثير الظهور التدرجي عند السكرول */
         .reveal-node {
             opacity: 0;
             will-change: transform, opacity;
-            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
-                        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .anim-fade-up { transform: translateY(30px); }
-        .anim-scale-in { transform: scale(0.95); }
+        .anim-fade-up { transform: translateY(40px); }
+        .anim-scale-in { transform: scale(0.93); }
 
         .reveal-node.active {
             opacity: 1;
             transform: translateY(0) scale(1);
         }
 
-        /* أنميشن العوم الهادئ الطويل للصورة الرئيسية */
-        @keyframes liquidFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(0.3deg); }
-        }
-        .animate-ultra-float {
-            animation: liquidFloat 6s ease-in-out infinite;
-        }
-
-        /* تأثير الشيمر اللؤلؤي المتطور داخل الحروف */
+        /* تأثير الشيمر اللؤلؤي المتطور داخل حروف العنوان الرئيسي */
         @keyframes premiumShimmer {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -50,79 +41,154 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: premiumShimmer 7s linear infinite;
+            animation: premiumShimmer 8s linear infinite;
         }
 
         /* ==========================================================================
-           النظام الموحد للنصوص التفاعلية (Micro-Lift & Acrylic Backdrop)
+           أنظمة تفاعل النصوص والكلام المتقدمة (Hover, Micro-Press & Quantum Ripples)
            ========================================================================== */
         .interactive-text-wrapper {
             position: relative;
             display: inline-block;
-            transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1);
-            will-change: transform;
-            padding: 4px 12px;
-            border-radius: 12px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, box-shadow;
+            padding: 4px 14px;
+            border-radius: 14px;
+            overflow: hidden; /* لحماية كبسولات الريبل الداخلية */
         }
 
         /* طبقة الأكريليك المدمجة المخصصة لكل نص بالموقع */
         .text-acrylic-glow {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, rgba(45, 212, 191, 0.04) 50%, transparent 80%);
-            filter: blur(20px);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(45, 212, 191, 0.04) 50%, transparent 80%);
+            filter: blur(15px);
             opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.75s cubic-bezier(0.25, 1, 0.5, 1), 
-                        transform 0.75s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: scale(0.7);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* تفعيل حركة النصوص عند تمرير الماوس (رفع هادئ وبطيء جداً) */
+        /* حركات التمرير (Hover Micro-Lift) */
         .interactive-text-wrapper:hover {
-            transform: translateY(-4px);
+            transform: translateY(-3px);
         }
         .interactive-text-wrapper:hover .text-acrylic-glow {
             opacity: 1;
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
-        /* الـ Perspective لتأثير الـ 3D العالي للكروت */
-        .tilt-card-container {
-            perspective: 1000px;
+        /* نظام ضغط الكلام الهيدروليكي فائق الاستجابة (Micro-Press) */
+        .interactive-text-wrapper:active {
+            transform: translateY(1px) scale(0.96) !important;
+            transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .tilt-card {
+
+        /* رعشة فيزيائية خفيفة جداً تحاكي الاستجابة اللمسية الفاخرة للهواتف */
+        @keyframes hapticShiver {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-0.5px); }
+            75% { transform: translateX(0.5px); }
+        }
+        .haptic-active {
+            animation: hapticShiver 0.1s linear infinite;
+        }
+
+        /* تأثير موجة الريبل الكمية المتولدة عند الضغط على أي كلمة بالموقع */
+        .quantum-ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.35) 0%, rgba(45, 212, 191, 0.1) 60%, transparent 80%);
+            transform: scale(0);
+            pointer-events: none;
+            z-index: 1;
+            animation: rippleExpansion 0.75s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+        @keyframes rippleExpansion {
+            to {
+                transform: scale(3.5);
+                opacity: 0;
+            }
+        }
+
+        /* ==========================================================================
+           محرك الصورة الكبيرة الفاخر (3D Cinema Logo Engine)
+           ========================================================================== */
+        .cinema-logo-container {
+            perspective: 2000px;
             will-change: transform;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
-            transform-style: preserve-3d;
         }
         
-        /* هيدر ناعم مطور */
-        header {
-            transition: background-color 0.5s, backdrop-filter 0.5s, box-shadow 0.5s;
+        .cinema-logo-card {
+            position: relative;
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        /* الطبقة الضوئية الهولوغرافية اللامعة فوق الصورة الرئيسية */
+        .holographic-glint {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 70%);
+            background-size: 200% 200%;
+            background-position: 0% 0%;
+            pointer-events: none;
+            z-index: 5;
+            mix-blend-mode: overlay;
+            transition: background-position 0.5s ease;
+        }
+
+        /* العوم الطبيعي التلقائي للصورة عند عدم تحريك الماوس */
+        @keyframes floatCinema {
+            0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+            50% { transform: translateY(-8px) rotateX(1deg) rotateY(-0.5deg); }
+        }
+        .logo-floating-active {
+            animation: floatCinema 7s ease-in-out infinite;
+        }
+
+        /* ==========================================================================
+           تأثير الـ 3D للكروت الأربعة السفلى
+           ========================================================================== */
+        .tilt-card-container { perspective: 1200px; }
+        .tilt-card {
+            will-change: transform;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* تأثير سكرول ناعم للهيدر */
+        header { transition: background-color 0.5s, backdrop-filter 0.5s, box-shadow 0.5s; }
         header.scrolled {
-            background-color: rgba(255, 255, 255, 0.75) !important;
+            background-color: rgba(255, 255, 255, 0.8) !important;
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.02);
         }
     </style>
 </head>
 <body class="text-stone-800 relative min-h-screen flex flex-col overflow-x-hidden select-none">
 
-    <canvas id="ambient-particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-60"></canvas>
+    <!-- كافاس محرك الجزيئات الذكي التفاعلي المتجاوب مع حركة الماوس والنقرات -->
+    <canvas id="ambient-particle-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-70"></canvas>
 
+    <!-- الهيدر الزجاجي الذكي المطور -->
     <header class="bg-white/90 shadow-xs sticky top-0 z-40 w-full border-b border-stone-100/50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3">
-                <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" 
-                     class="reveal-node anim-fade-up h-11 w-11 rounded-full object-cover shadow-xs border border-stone-100" style="transition-delay: 50ms;">
+                <img src="logo.jpg" alt="Logo" id="header-mini-logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" 
+                     class="reveal-node anim-fade-up h-11 w-11 rounded-full object-cover shadow-xs border border-stone-100 cursor-pointer" style="transition-delay: 50ms;">
                 
                 <div id="logo-fallback" class="hidden h-11 w-11 rounded-full bg-[#2A4B37] text-white flex items-center justify-center font-bold text-sm">KA</div>
                 
-                <div class="interactive-text-wrapper">
+                <!-- اسم البراند يدعم كبسولات الضغط المتطورة -->
+                <div class="interactive-text-wrapper cursor-pointer">
                     <div class="text-acrylic-glow"></div>
                     <span class="reveal-node anim-fade-up text-xl font-bold text-[#2A4B37] tracking-wide relative z-10" style="transition-delay: 150ms;">KHALED ALI STORE</span>
                 </div>
@@ -130,17 +196,19 @@
         </div>
     </header>
 
+    <!-- القسم الرئيسي الفاخر (Hero Section) -->
     <section class="max-w-7xl mx-auto px-6 py-24 text-center md:text-right md:grid md:grid-cols-2 gap-16 items-center flex-1 w-full relative z-10">
         <div class="space-y-8">
             <div class="reveal-node anim-fade-up" style="transition-delay: 250ms;">
-                <div class="interactive-text-wrapper bg-emerald-50/60 border border-emerald-100/50 px-4 py-1.5 rounded-full">
+                <div class="interactive-text-wrapper bg-emerald-50/60 border border-emerald-100/50 px-4 py-1.5 rounded-full cursor-pointer">
                     <div class="text-acrylic-glow"></div>
                     <span class="text-emerald-950 text-sm font-semibold relative z-10">أهلاً بكم في KHALED ALI STORE</span>
                 </div>
             </div>
             
+            <!-- عنوان رئيسي تفاعلي عملاق يمتص الضغط -->
             <div class="block">
-                <div class="interactive-text-wrapper w-full text-center md:text-right">
+                <div class="interactive-text-wrapper w-full text-center md:text-right cursor-pointer">
                     <div class="text-acrylic-glow !bg-radial-[circle,_rgba(16,185,129,0.25)_0%,_transparent_75%]"></div>
                     <h1 class="reveal-node anim-fade-up shimmer-text text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.35] relative z-10" style="transition-delay: 350ms;">
                         تشكيلة فاخرة من الأدوات المنزلية والزجاج العصري
@@ -148,8 +216,9 @@
                 </div>
             </div>
             
+            <!-- الوصف النصي تفاعلي بالكامل -->
             <div class="block">
-                <div class="interactive-text-wrapper max-w-xl">
+                <div class="interactive-text-wrapper max-w-xl cursor-pointer">
                     <div class="text-acrylic-glow"></div>
                     <p class="reveal-node anim-fade-up text-lg text-stone-600 leading-relaxed relative z-10" style="transition-delay: 450ms;">
                         نوفر لكم أرقى أطقم العشاء، الكاسات، ومستلزمات المطبخ الفخمة التي تمنح منزلك لمسة جمالية فريدة ومستوحاة من الفخامة العصرية.
@@ -158,24 +227,30 @@
             </div>
         </div>
         
-        <div class="mt-12 md:mt-0 flex justify-center">
-            <div class="reveal-node anim-scale-in relative p-2.5 bg-white/80 backdrop-blur-md rounded-3xl shadow-[0_30px_70px_rgba(0,0,0,0.04)] border border-white w-full max-w-md h-85 sm:h-98 overflow-hidden animate-ultra-float" style="transition-delay: 550ms;">
-                <img src="logo.jpg" alt="Khaled Ali Store" onerror="this.src='https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?q=80&w=600'" class="rounded-2xl w-full h-full object-cover">
+        <!-- معرض صورة اللوجو الكبيرة المدعومة بالكامل بمحرك السينما ثلاثي الأبعاد والوميض -->
+        <div class="mt-12 md:mt-0 flex justify-center cinema-logo-container">
+            <div id="main-cinema-logo" class="cinema-logo-card logo-floating-active reveal-node anim-scale-in relative p-2.5 bg-white/80 backdrop-blur-md rounded-3xl shadow-[0_30px_70px_rgba(0,0,0,0.04)] border border-white w-full max-w-md h-85 sm:h-98 overflow-hidden cursor-crosshair" style="transition-delay: 550ms; transform-style: preserve-3d;">
+                <!-- الطبقة الهولوغرافية -->
+                <div class="holographic-glint"></div>
+                <!-- الصورة الفعلية مع حماية العمق ثلاثي الأبعاد للداخل -->
+                <img src="logo.jpg" alt="Khaled Ali Store" onerror="this.src='https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?q=80&w=600'" 
+                     class="rounded-2xl w-full h-full object-cover select-none pointer-events-none" style="transform: translateZ(30px); scale: 0.98;">
             </div>
         </div>
     </section>
 
+    <!-- قسم قنوات التواصل والروابط الرسمية (مدعوم بمحرك الـ 3D Tilt ثلاثي الأبعاد) -->
     <section class="bg-stone-100/60 backdrop-blur-xs py-20 border-t border-stone-200/50 w-full relative z-10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center space-y-3 mb-16">
-                <div class="interactive-text-wrapper">
+                <div class="interactive-text-wrapper cursor-pointer">
                     <div class="text-acrylic-glow"></div>
                     <h2 class="reveal-node anim-fade-up text-3xl font-bold text-stone-900 relative z-10" style="transition-delay: 100ms;">
                         تابعوا أسعارنا وحصرياتنا أولاً بأول 📢
                     </h2>
                 </div>
                 <br>
-                <div class="interactive-text-wrapper">
+                <div class="interactive-text-wrapper cursor-pointer">
                     <div class="text-acrylic-glow"></div>
                     <p class="reveal-node anim-fade-up text-stone-500 relative z-10" style="transition-delay: 200ms;">
                         اشتركوا في قنواتنا الرسمية وتواصلوا معنا مباشرة على مدار الساعة
@@ -184,6 +259,7 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 tilt-card-container">
+                <!-- كارت 1: تليجرام قطاعي -->
                 <a href="https://t.me/+Tg51D7mJwR5NOWUo" target="_blank" 
                    class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group" 
                    style="transition-delay: 300ms;">
@@ -192,6 +268,7 @@
                     <span class="text-xs font-semibold text-sky-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
+                <!-- كارت 2: تليجرام جملة -->
                 <a href="https://t.me/+japBuh8s_btiNzZk" target="_blank" 
                    class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group" 
                    style="transition-delay: 400ms;">
@@ -200,6 +277,7 @@
                     <span class="text-xs font-semibold text-blue-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
+                <!-- كارت 3: تليجرام بلاستيك -->
                 <a href="https://t.me/+qSb8Id_HmTpjMWY0" target="_blank" 
                    class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group" 
                    style="transition-delay: 500ms;">
@@ -208,6 +286,7 @@
                     <span class="text-xs font-semibold text-indigo-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
                 </a>
 
+                <!-- كارت 4: واتساب -->
                 <a href="https://wa.me/201090140339" target="_blank" 
                    class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group" 
                    style="transition-delay: 600ms;">
@@ -219,15 +298,19 @@
         </div>
     </section>
 
+    <!-- الفوتر الفاخر المحمي الحركية -->
     <footer class="bg-stone-900 text-stone-400 py-10 text-center text-sm mt-auto w-full relative z-10 border-t border-stone-800">
-        <div class="interactive-text-wrapper">
+        <div class="interactive-text-wrapper cursor-pointer">
             <div class="text-acrylic-glow !bg-radial-[circle,_rgba(255,255,255,0.05)_0%,_transparent_60%]"></div>
             <p class="reveal-node anim-fade-up text-stone-400 relative z-10" style="transition-delay: 100ms;">© 2026 KHALED ALI STORE. جميع الحقوق محفوظة بنظام الحماية الفاخرة.</p>
         </div>
     </footer>
 
+    <!-- ==========================================================================
+         البرمجة الذكية والمتقدمة لكافة المحركات التفاعلية الفاخرة
+         ========================================================================== */ -->
     <script>
-        // 1. تشغيل وتحديث الهيدر الزجاجي الفاخر
+        // 1. تشغيل وتحديث الهيدر الزجاجي الفاخر عند الاسكرول
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 20) {
@@ -237,10 +320,10 @@
             }
         });
 
-        // 2. محرك تشغيل أنميشن الـ Scroll Observer الفائق السلاسة
+        // 2. محرك تشغيل أنميشن الـ Scroll Observer للظهور التدريجي للعناصر
         document.addEventListener("DOMContentLoaded", () => {
             const animatedElements = document.querySelectorAll('.reveal-node');
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.04 };
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.02 };
 
             const intersectionObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -254,11 +337,11 @@
             animatedElements.forEach(element => intersectionObserver.observe(element));
         });
 
-        // 3. محرك الجزيئات الذكي التفاعلي خلف النصوص والمحتوى (Interactive Particles Canvas Engine)
+        // 3. محرك جزيئات الخلفية الحية المتطور (تفاعل ذكي كامل للهروب والانجذاب والنقر)
         const canvas = document.getElementById('ambient-particle-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
-        let mouse = { x: null, y: null, radius: 180 };
+        let mouse = { x: null, y: null, radius: 190 };
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -267,6 +350,20 @@
         window.addEventListener('resize', resizeCanvas);
         window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+        
+        // عند نقر المستخدم في أي مكان بالصفحة، تتولد جزيئات نيون من مكان الضغطة فورا وتنفجر للخارج
+        window.addEventListener('click', (e) => {
+            for(let i=0; i<8; i++) {
+                let p = new Particle();
+                p.x = e.clientX;
+                p.y = e.clientY;
+                p.speedX = Math.random() * 4 - 2;
+                p.speedY = Math.random() * 4 - 2;
+                p.size = Math.random() * 4 + 2;
+                p.opacity = 0.8;
+                particlesArray.push(p);
+            }
+        });
         resizeCanvas();
 
         class Particle {
@@ -276,7 +373,7 @@
                 this.size = Math.random() * 3 + 1;
                 this.speedX = Math.random() * 0.4 - 0.2;
                 this.speedY = Math.random() * 0.4 - 0.2;
-                this.baseOpacity = Math.random() * 0.2 + 0.05;
+                this.baseOpacity = Math.random() * 0.25 + 0.05;
                 this.opacity = this.baseOpacity;
             }
             update() {
@@ -285,15 +382,18 @@
                 if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
                 if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
 
-                // التفاعل مع مؤشر الفأرة وسرعته
                 if (mouse.x && mouse.y) {
                     let dx = mouse.x - this.x;
                     let dy = mouse.y - this.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
+                    // فيزياء الهروب العكسي للجزيئات من الماوس
                     if (distance < mouse.radius) {
-                        this.opacity = Math.min(0.6, this.opacity + 0.03);
-                        this.x -= dx * 0.01; // انجذاب حركي مرن
-                        this.y -= dy * 0.01;
+                        this.opacity = Math.min(0.65, this.opacity + 0.04);
+                        let forceDirectionX = dx / distance;
+                        let forceDirectionY = dy / distance;
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= forceDirectionX * force * 2.5;
+                        this.y -= forceDirectionY * force * 2.5;
                     } else if (this.opacity > this.baseOpacity) {
                         this.opacity -= 0.005;
                     }
@@ -311,20 +411,62 @@
 
         function initParticles() {
             particlesArray = [];
-            let numberOfParticles = Math.floor((canvas.width * canvas.height) / 9000);
-            for (let i = 0; i < Math.min(numberOfParticles, 120); i++) {
+            let numberOfParticles = Math.floor((canvas.width * canvas.height) / 8500);
+            for (let i = 0; i < Math.min(numberOfParticles, 140); i++) {
                 particlesArray.push(new Particle());
             }
         }
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particlesArray.forEach(p => { p.update(); p.draw(); });
+            particlesArray.forEach((p, index) => {
+                p.update();
+                p.draw();
+                // تنظيف الجزيئات الزائدة المتولدة من النقرات لمنع تعليق المتصفح
+                if(p.opacity <= 0) particlesArray.splice(index, 1);
+            });
             requestAnimationFrame(animateParticles);
         }
         initParticles();
         animateParticles();
 
-        // 4. محرك الـ 3D Kinetic Tilt للكروت التفاعلية الأربعة
+
+        // 4. محرك الـ 3D Cinema لـ صورة اللوجو الكبيرة وتتبع الفأرة اللامع والوميض
+        const cinemaLogo = document.getElementById('main-cinema-logo');
+        const glintOverlay = cinemaLogo.querySelector('.holographic-glint');
+
+        cinemaLogo.addEventListener('mousemove', (e) => {
+            // إيقاف أنميشن العوم الافتراضي مؤقتا أثناء تحريك الماوس للتحكم الكامل
+            cinemaLogo.classList.remove('logo-floating-active');
+            
+            const rect = cinemaLogo.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const xc = rect.width / 2;
+            const yc = rect.height / 2;
+            
+            // حساب زوايا الميل الفيزيائي بدقة (محاور X و Y)
+            const angleX = (yc - y) / 10; 
+            const angleY = (x - xc) / 10; 
+
+            cinemaLogo.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.04)`;
+            cinemaLogo.style.boxShadow = `0 35px 80px rgba(16, 185, 129, 0.12), 0 10px 30px rgba(0,0,0,0.03)`;
+            
+            // تحريك شعاع الإضاءة الهولوغرافي ديناميكياً عكس اتجاه الفأرة
+            const percentX = (x / rect.width) * 100;
+            const percentY = (y / rect.height) * 100;
+            glintOverlay.style.backgroundPosition = `${percentX}% ${percentY}%`;
+        });
+
+        cinemaLogo.addEventListener('mouseleave', () => {
+            // إعادة تفعيل العوم التلقائي اللطيف وإرجاع الصورة لحجمها الطبيعي بمرونة
+            cinemaLogo.classList.add('logo-floating-active');
+            cinemaLogo.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+            cinemaLogo.style.boxShadow = `0 30px 70px rgba(0,0,0,0.04)`;
+            glintOverlay.style.backgroundPosition = `0% 0%`;
+        });
+
+
+        // 5. محرك الـ 3D Kinetic Tilt للكروت التفاعلية الأربعة السفلى
         const cards = document.querySelectorAll('.tilt-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -333,15 +475,50 @@
                 const y = e.clientY - rect.top;
                 const xc = rect.width / 2;
                 const yc = rect.height / 2;
-                const angleX = (yc - y) / 14; // زاوية الـ ميل العمودي الآمنة
-                const angleY = (x - xc) / 14; // زاوية الـ ميل الأفقي
+                const angleX = (yc - y) / 12; 
+                const angleY = (x - xc) / 12; 
                 
                 card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.03)`;
-                card.style.boxShadow = `0 25px 50px rgba(16, 185, 129, 0.08)`;
+                card.style.boxShadow = `0 30px 60px rgba(16, 185, 129, 0.09)`;
             });
             card.addEventListener('mouseleave', () => {
                 card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
                 card.style.boxShadow = 'none';
+            });
+        });
+
+
+        // 6. محرك ضغط الكلام الذكي (Quantum Ripple Injection Engine) لكل نصوص الموقع
+        const interactiveTexts = document.querySelectorAll('.interactive-text-wrapper');
+        
+        interactiveTexts.forEach(textBlock => {
+            textBlock.addEventListener('click', function(e) {
+                // ا) حقن تأثير الاهتزاز اللمسي الميكروي (Haptic Feedback)
+                textBlock.classList.add('haptic-active');
+                setTimeout(() => textBlock.classList.remove('haptic-active'), 120);
+
+                // ب) حساب إحداثيات الضغطة الدقيقة داخل الكلمة لإنشاء مصفوفة الريبل
+                const rect = this.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickY = e.clientY - rect.top;
+
+                // ج) إنشاء وحقن عنصر الريبل السائل
+                const ripple = document.createElement('span');
+                ripple.classList.add('quantum-ripple');
+                
+                // تحديد الحجم بناءً على الحجم الكلي للنص المضغوط
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = `${size}px`;
+                
+                // جعل مركز الريبل هو مكان نقرة الإصبع بالضبط
+                ripple.style.left = `${clickX - size/2}px`;
+                ripple.style.top = `${clickY - size/2}px`;
+
+                // د) إدراج الريبل وتأمين تنظيفه من الذاكرة بعد انتهاء الأنميشن
+                this.appendChild(ripple);
+                ripple.addEventListener('animationend', () => {
+                    ripple.remove();
+                });
             });
         });
     </script>
