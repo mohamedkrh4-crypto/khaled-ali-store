@@ -10,8 +10,17 @@
         body { font-family: 'Cairo', sans-serif; overflow-x: hidden; background-color: #faf9f6; } 
         html { scroll-behavior: smooth; }
 
+        /* منع سحب أي صورة في الموقع نهائياً لجعل التصفح رصين ومستقر */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+
         /* ==========================================================================
-           المحرك الحركي المتطور الاصلي - Kinetic Animation Core (لم يتم تعديله)
+           المحرك الحركي المتطور الاصلي - Kinetic Animation Core
            ========================================================================== */
         
         /* تأثير الظهور التدرجي عند السكرول مع الحفاظ على الانسيابية */
@@ -110,7 +119,7 @@
         }
 
         /* ==========================================================================
-           الإضافات الجديدة بالكامل (تراكمية بدون مسح أو تعديل ما سبق)
+           الإضافات الجديدة السينمائية
            ========================================================================== */
         
         /* تأثير "العدسة الفاخرة والنفس السينمائي" للصورة الكبيرة عند حرك الماوس */
@@ -118,7 +127,6 @@
             transition: box-shadow 1.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
         }
         .animate-ultra-float:hover {
-            /* انتشار ظل عميق وناعم جداً يتوسع بهدوء رائع */
             box-shadow: 0 45px 95px rgba(16, 185, 129, 0.12), 0 20px 50px rgba(0, 0, 0, 0.02) !important;
         }
         .animate-ultra-float img {
@@ -126,7 +134,6 @@
             will-change: transform;
         }
         .animate-ultra-float:hover img {
-            /* زوم داخلي انسيابي بطيء وفخم جداً داخل الإطار الثابت المعلق */
             transform: scale(1.04) !important;
         }
 
@@ -155,7 +162,8 @@
     <header class="bg-white/90 shadow-xs sticky top-0 z-40 w-full border-b border-stone-100/50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3">
-                <img src="logo.jpg" alt="Logo" id="header-mini-logo" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" 
+                <!-- تم إضافة منع السحب هنا -->
+                <img src="logo.jpg" alt="Logo" id="header-mini-logo" draggable="false" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" 
                      class="reveal-node anim-fade-up h-11 w-11 rounded-full object-cover shadow-xs border border-stone-100" style="transition-delay: 50ms;">
                 
                 <div id="logo-fallback" class="hidden h-11 w-11 rounded-full bg-[#2A4B37] text-white flex items-center justify-center font-bold text-sm">KA</div>
@@ -198,7 +206,8 @@
         
         <div class="mt-12 md:mt-0 flex justify-center">
             <div class="reveal-node anim-scale-in relative p-2.5 bg-white/80 backdrop-blur-md rounded-3xl shadow-[0_30px_70px_rgba(0,0,0,0.04)] border border-white w-full max-w-md h-85 sm:h-98 overflow-hidden animate-ultra-float" style="transition-delay: 550ms;">
-                <img src="logo.jpg" alt="Khaled Ali Store" onerror="this.src='https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?q=80&w=600'" class="rounded-2xl w-full h-full object-cover">
+                <!-- تم إضافة منع السحب هنا لمنع المشكلة تماماً -->
+                <img src="logo.jpg" alt="Khaled Ali Store" draggable="false" onerror="this.src='https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?q=80&w=600'" class="rounded-2xl w-full h-full object-cover">
             </div>
         </div>
     </section>
@@ -265,7 +274,7 @@
     </footer>
 
     <script>
-        // 1. تشغيل وتحديث الهيدر الزجاجي الفاخر (أصلي)
+        // 1. تشغيل وتحديث الهيدر الزجاجي الفاخر
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 20) {
@@ -275,7 +284,7 @@
             }
         });
 
-        // 2. محرك تشغيل أنميشن الـ Scroll Observer الفائق السلاسة (أصلي)
+        // 2. محرك تشغيل أنميشن الـ Scroll Observer الفائق السلاسة
         document.addEventListener("DOMContentLoaded", () => {
             const animatedElements = document.querySelectorAll('.reveal-node');
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.04 };
@@ -292,7 +301,7 @@
             animatedElements.forEach(element => intersectionObserver.observe(element));
         });
 
-        // 3. محرك الجزيئات الذكي التفاعلي المطور (يدعم الحركة الأصلية + التفاعل الإضافي للضغط)
+        // 3. محرك الجزيئات الذكي التفاعلي المطور
         const canvas = document.getElementById('ambient-particle-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
@@ -308,12 +317,10 @@
         resizeCanvas();
 
         class Particle {
-            // تحديث الباني ليدعم إحداثيات الضغط الإضافية دون المساس بالوضع التلقائي الافتراضي
             constructor(clickX = null, clickY = null) {
                 this.x = clickX !== null ? clickX : Math.random() * canvas.width;
                 this.y = clickY !== null ? clickY : Math.random() * canvas.height;
                 this.size = Math.random() * 3 + 1;
-                // سرعة انتشار الجزيئات عند النقر تكون هادئة وانسيابية ومحسوبة بدقة
                 this.speedX = clickX !== null ? (Math.random() * 1.2 - 0.6) : (Math.random() * 0.4 - 0.2);
                 this.speedY = clickY !== null ? (Math.random() * 1.2 - 0.6) : (Math.random() * 0.4 - 0.2);
                 this.baseOpacity = Math.random() * 0.2 + 0.05;
@@ -327,10 +334,8 @@
                 if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
 
                 if (this.isClickParticle) {
-                    // تلاشي تدريجي وبطيء جداً لجزيئات النقرات لراحة العين (تأثير ولادة النجوم البطيئة)
                     this.opacity -= 0.004; 
                 } else {
-                    // التفاعل الأصلي الكامل والمثالي مع مؤشر الفأرة (بدون أي تعديل)
                     if (mouse.x && mouse.y) {
                         let dx = mouse.x - this.x;
                         let dy = mouse.y - this.y;
@@ -368,7 +373,6 @@
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
                 particlesArray[i].draw();
-                // تنظيف الجزيئات المنتهية للحفاظ على استقرار الأداء
                 if (particlesArray[i].isClickParticle && particlesArray[i].opacity <= 0) {
                     particlesArray.splice(i, 1);
                     i--;
@@ -379,7 +383,7 @@
         initParticles();
         animateParticles();
 
-        // 4. محرك الـ 3D Kinetic Tilt الأصلي للكروت الأربعة (لم يتم لمسه أو تعديله)
+        // 4. محرك الـ 3D Kinetic Tilt الأصلي للكروت الأربعة
         const cards = document.querySelectorAll('.tilt-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -400,14 +404,12 @@
             });
         });
 
-        // 5. محرك التفاعل الإضافي الفاخر عند الضغط (تأثير ولادة النجوم البطيئة + نبض الضوء السينمائي للهيكل)
+        // 5. محرك التفاعل الإضافي عند الضغط
         window.addEventListener('click', (e) => {
-            // توليد 15 جزيء ينساب بنعومة فائقة من نقطة النقر مباشرة بدون سرعة عشوائية مفاجئة
             for (let i = 0; i < 15; i++) {
                 particlesArray.push(new Particle(e.clientX, e.clientY));
             }
             
-            // نبضة ضوء هادئة جداً للخلفية كاملة تزيد وتنخفض بنعومة (Cinematic Ambient Pulse)
             canvas.style.transition = 'opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
             canvas.style.opacity = '0.9';
             setTimeout(() => {
