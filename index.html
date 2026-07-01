@@ -30,7 +30,7 @@
             transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
                         transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .anim-fade-up { transform: translateY(30px); }
+        .anim-fade-up { transform: translateY(40px); }
         .anim-scale-in { transform: scale(0.95); }
 
         .reveal-node.active {
@@ -102,9 +102,23 @@
             perspective: 1000px;
         }
         .tilt-card {
-            will-change: transform;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
+            position: relative;
+            will-change: transform, box-shadow;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s cubic-bezier(0.25, 1, 0.5, 1);
             transform-style: preserve-3d;
+        }
+        
+        /* طبقة التوهج الأكريليكي الفاخرة الجديدة المخصصة للكروت بالكامل */
+        .card-acrylic-glow {
+            position: absolute;
+            inset: -15px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(45, 212, 191, 0.05) 50%, transparent 75%);
+            filter: blur(25px);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+            z-index: 0;
         }
         
         /* هيدر ناعم مطور */
@@ -119,10 +133,8 @@
         }
 
         /* ==========================================================================
-           الإضافات الجديدة السينمائية
+           الإضافات الجديدة السينمائية للصورة الكبيرة
            ========================================================================== */
-        
-        /* تأثير "العدسة الفاخرة والنفس السينمائي" للصورة الكبيرة عند حرك الماوس */
         .animate-ultra-float {
             transition: box-shadow 1.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
         }
@@ -137,7 +149,6 @@
             transform: scale(1.04) !important;
         }
 
-        /* تأثير الانعكاس الزجاجي اللؤلؤي العابر على الصورة ببطء شديد كل 8 ثوانٍ */
         .animate-ultra-float::after {
             content: '';
             position: absolute;
@@ -162,7 +173,6 @@
     <header class="bg-white/90 shadow-xs sticky top-0 z-40 w-full border-b border-stone-100/50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3">
-                <!-- تم إضافة منع السحب هنا -->
                 <img src="logo.jpg" alt="Logo" id="header-mini-logo" draggable="false" onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden')" 
                      class="reveal-node anim-fade-up h-11 w-11 rounded-full object-cover shadow-xs border border-stone-100" style="transition-delay: 50ms;">
                 
@@ -206,7 +216,6 @@
         
         <div class="mt-12 md:mt-0 flex justify-center">
             <div class="reveal-node anim-scale-in relative p-2.5 bg-white/80 backdrop-blur-md rounded-3xl shadow-[0_30px_70px_rgba(0,0,0,0.04)] border border-white w-full max-w-md h-85 sm:h-98 overflow-hidden animate-ultra-float" style="transition-delay: 550ms;">
-                <!-- تم إضافة منع السحب هنا لمنع المشكلة تماماً -->
                 <img src="logo.jpg" alt="Khaled Ali Store" draggable="false" onerror="this.src='https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?q=80&w=600'" class="rounded-2xl w-full h-full object-cover">
             </div>
         </div>
@@ -231,36 +240,44 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 tilt-card-container">
+                <!-- كارت 1 -->
                 <a href="https://t.me/+Tg51D7mJwR5NOWUo" target="_blank" 
-                   class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group" 
-                   style="transition-delay: 300ms;">
-                    <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl mb-5 group-hover:bg-sky-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-inner">🛍️</div>
-                    <div class="interactive-text-wrapper mb-2"><div class="text-acrylic-glow"></div><h3 class="text-lg font-bold text-stone-900 relative z-10">قناة التليجرام (بالقطعة)</h3></div>
-                    <span class="text-xs font-semibold text-sky-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
+                   class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group relative" 
+                   style="transition-delay: 100ms;">
+                    <div class="card-acrylic-glow"></div>
+                    <div class="w-14 h-14 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl mb-5 group-hover:bg-sky-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-inner relative z-10">🛍️</div>
+                    <div class="interactive-text-wrapper mb-2 relative z-10"><div class="text-acrylic-glow"></div><h3 class="text-lg font-bold text-stone-900 relative z-10">قناة التليجرام (بالقطعة)</h3></div>
+                    <span class="text-xs font-semibold text-sky-600 group-hover:underline mt-auto relative z-10">اضغط للانضمام ←</span>
                 </a>
 
+                <!-- كارت 2 -->
                 <a href="https://t.me/+japBuh8s_btiNzZk" target="_blank" 
-                   class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group" 
-                   style="transition-delay: 400ms;">
+                   class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group relative" 
+                   style="transition-delay: 200ms;">
+                    <div class="card-acrylic-glow"></div>
                     <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-5 group-hover:bg-blue-600 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-inner">📦</div>
-                    <div class="interactive-text-wrapper mb-2"><div class="text-acrylic-glow"></div><h3 class="text-lg font-bold text-stone-900 relative z-10">قناة الجملة (بالكرتونة)</h3></div>
-                    <span class="text-xs font-semibold text-blue-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
+                    <div class="interactive-text-wrapper mb-2 relative z-10"><div class="text-acrylic-glow"></div><h3 class="text-lg font-bold text-stone-900 relative z-10">قناة الجملة (بالكرتونة)</h3></div>
+                    <span class="text-xs font-semibold text-blue-600 group-hover:underline mt-auto relative z-10">اضغط للانضمام ←</span>
                 </a>
 
+                <!-- كارت 3 -->
                 <a href="https://t.me/+qSb8Id_HmTpjMWY0" target="_blank" 
-                   class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group" 
-                   style="transition-delay: 500ms;">
+                   class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group relative" 
+                   style="transition-delay: 300ms;">
+                    <div class="card-acrylic-glow"></div>
                     <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center text-2xl mb-5 group-hover:bg-indigo-600 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-inner">✨</div>
-                    <div class="interactive-text-wrapper mb-2"><div class="text-acrylic-glow"></div><h3 class="text-lg font-bold text-stone-900 relative z-10">قناة التليجرام (للبلاستيك)</h3></div>
-                    <span class="text-xs font-semibold text-indigo-600 group-hover:underline mt-auto">اضغط للانضمام ←</span>
+                    <div class="interactive-text-wrapper mb-2 relative z-10"><div class="text-acrylic-glow"></div><h3 class="text-lg font-bold text-stone-900 relative z-10">قناة التليجرام (للبلاستيك)</h3></div>
+                    <span class="text-xs font-semibold text-indigo-600 group-hover:underline mt-auto relative z-10">اضغط للانضمام ←</span>
                 </a>
 
+                <!-- كارت 4 -->
                 <a href="https://wa.me/201090140339" target="_blank" 
-                   class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group" 
-                   style="transition-delay: 600ms;">
+                   class="tilt-card reveal-node anim-fade-up bg-white p-7 rounded-2xl border border-stone-200/60 flex flex-col items-center text-center shadow-xs group relative" 
+                   style="transition-delay: 400ms;">
+                    <div class="card-acrylic-glow"></div>
                     <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-2xl mb-5 group-hover:bg-emerald-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-inner">💬</div>
-                    <div class="interactive-text-wrapper mb-2"><div class="text-acrylic-glow"></div><h3 class="text-lg font-bold text-stone-900 relative z-10">واتساب</h3></div>
-                    <span class="text-xs font-semibold text-emerald-600 group-hover:underline mt-auto">افتح شات الواتساب ←</span>
+                    <div class="interactive-text-wrapper mb-2 relative z-10"><div class="text-acrylic-glow"></div><h3 class="text-lg font-bold text-stone-900 relative z-10">واتساب</h3></div>
+                    <span class="text-xs font-semibold text-emerald-600 group-hover:underline mt-auto relative z-10">افتح شات الواتساب ←</span>
                 </a>
             </div>
         </div>
@@ -284,16 +301,18 @@
             }
         });
 
-        // 2. محرك تشغيل أنميشن الـ Scroll Observer الفائق السلاسة
+        // 2. محرك تشغيل أنميشن الـ Scroll Observer المستمر والديناميكي (تم تطويره ليعمل بصفة مستمرة ذهاباً وإياباً)
         document.addEventListener("DOMContentLoaded", () => {
             const animatedElements = document.querySelectorAll('.reveal-node');
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.04 };
 
-            const intersectionObserver = new IntersectionObserver((entries, observer) => {
+            const intersectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
+                    } else {
+                        // إزالة الكلاس عند الخروج من الشاشة ليعاد الأنميشن فور العودة مجدداً
+                        entry.target.classList.remove('active');
                     }
                 });
             }, observerOptions);
@@ -383,7 +402,7 @@
         initParticles();
         animateParticles();
 
-        // 4. محرك الـ 3D Kinetic Tilt الأصلي للكروت الأربعة
+        // 4. محرك الـ 3D Kinetic Tilt المتطور (تم دمجه مع تأثير الرفع الرأسي والهالة الأكريليكية الفاخرة)
         const cards = document.querySelectorAll('.tilt-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -395,12 +414,28 @@
                 const angleX = (yc - y) / 14; 
                 const angleY = (x - xc) / 14; 
                 
-                card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.03)`;
-                card.style.boxShadow = `0 25px 50px rgba(16, 185, 129, 0.08)`;
+                // إضافة الرفع الرأسي الفاخر المنساب translateY(-14px) مع التكبير والإمالة ثلاثية الأبعاد
+                card.style.transform = `translateY(-14px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.04)`;
+                card.style.boxShadow = `0 35px 75px rgba(16, 185, 129, 0.12), 0 15px 35px rgba(0, 0, 0, 0.02)`;
+                
+                // إظهار وتكبير هالة الضوء الأكريليكي المخصصة للكارت
+                const glow = card.querySelector('.card-acrylic-glow');
+                if (glow) {
+                    glow.style.opacity = '1';
+                    glow.style.transform = 'scale(1.1) translateZ(-10px)';
+                }
             });
             card.addEventListener('mouseleave', () => {
-                card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+                // إعادة الكارت لوضعه الطبيعي تماماً وبنعومة مريحة للأعصاب
+                card.style.transform = `translateY(0px) rotateX(0deg) rotateY(0deg) scale(1)`;
                 card.style.boxShadow = 'none';
+                
+                // إخفاء هالة الضوء الأكريليكي
+                const glow = card.querySelector('.card-acrylic-glow');
+                if (glow) {
+                    glow.style.opacity = '0';
+                    glow.style.transform = 'scale(0.8) translateZ(-10px)';
+                }
             });
         });
 
